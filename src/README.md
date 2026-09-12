@@ -2,6 +2,18 @@
 
 Place all your project's source code in this folder.
 
+## 📊 Project: Bob Copilot - Defense & Aerospace
+
+| Field | Value |
+|---|---|
+| **Project Title** | Bob Copilot - Mission Readiness & Predictive Maintenance |
+| **Track** | Defense & Aerospace - Mission Readiness & Predictive Maintenance |
+| **Team Lead** | Disu Makadiya |
+| **Team Members** | Vaibhavi Karia, Pushti Kansara, Rutvi Shah |
+| **Problem** | Military organisations cannot reliably determine whether aircraft, vehicles, and equipment are mission-ready. Maintenance runs on fixed calendar schedules regardless of actual component condition. HUMS sensor data that could predict failures weeks in advance sits unanalysed. |
+| **Solution** | Bob Copilot ingests sensor data and service records to identify non-ready assets, explain each readiness issue, predict which components will fail before the next mission window, and recommend a prioritised maintenance plan. |
+| **Annual Maintenance Cost** | US military spends $90B/year on maintenance - shifting to predictive approaches saves billions |
+
 ## Structure Guidelines
 
 Organize your code logically. Here are common patterns — use whatever fits

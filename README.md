@@ -1,4 +1,4 @@
-# 🚀 [Your Project Title Here]
+# 🚀 Bob Copilot - Mission Readiness & Predictive Maintenance
 
 > ⚠️ **Replace everything in `[ ]` brackets with your actual content before submission.**
 
@@ -8,36 +8,32 @@
 
 | Field | Value |
 |---|---|
-| **Team Name** | [Your Team Name] |
-| **Track** | [AI / DevOps / Sustainability / Open] |
-| **Team Lead** | [Name] — [email@ibm.com] |
-| **Members** | [Name 1], [Name 2], [Name 3] |
+| **Team Name** | Bob Copilot |
+| **Track** | Defense & Aerospace - Mission Readiness & Predictive Maintenance |
+| **Team Lead** | Disu Makadiya — disu.makadiya@ibm.com |
+| **Members** | Vaibhavi Karia, Pushti Kansara, Rutvi Shah |
 
 ---
 
 ## 🎯 Problem Statement
 
-> In 2–3 sentences: What problem does your project solve? Who experiences this problem?
-
-[Describe the real-world problem your project addresses. Be specific about who the user is and what pain point they face.]
+Military organisations cannot reliably determine whether aircraft, vehicles, and equipment are mission-ready. Maintenance runs on fixed calendar schedules regardless of actual component condition. HUMS (Health & Usage Monitoring System) sensor data that could predict failures weeks in advance sits unanalysed. When platforms fail unexpectedly, operational readiness drops and recovery takes weeks. The US military spends $90B/year on maintenance — shifting to predictive approaches saves billions.
 
 ---
 
 ## 💡 Solution
 
-> In 2–3 sentences: What did you build? How does it solve the problem above?
-
-[Describe your solution clearly. Explain the core mechanism — what makes it work.]
+Bob Copilot ingests sensor data and service records to identify non-ready assets, explain each readiness issue, predict which components will fail before the next mission window, and recommend a prioritised maintenance plan. The solution leverages HUMS sensor data and service records to shift from fixed-schedule maintenance to predictive approaches, potentially saving billions in annual maintenance costs.
 
 ---
 
 ## ✨ Key Features
 
-- **Feature 1:** [Brief description — e.g., "Real-time anomaly detection using watsonx.ai"]
-- **Feature 2:** [Brief description]
-- **Feature 3:** [Brief description]
-- **Feature 4:** [Optional]
-- **Feature 5:** [Optional]
+- **Real-time Asset Readiness Assessment**: Identify non-ready assets using sensor data and service records
+- **Failure Prediction**: Predict which components will fail before the next mission window using HUMS sensor data
+- **Root Cause Explanation**: Explain each readiness issue with detailed diagnostics
+- **Prioritised Maintenance Planning**: Recommend a prioritised maintenance plan based on failure risk and operational impact
+- **HUMS Data Integration**: Leverage Health & Usage Monitoring System sensor data for predictive analytics
 
 ---
 
@@ -45,18 +41,18 @@
 
 | Category | Technologies |
 |---|---|
-| **Languages** | [e.g., Python, TypeScript] |
-| **Frameworks** | [e.g., FastAPI, React] |
-| **IBM Technologies** | [e.g., watsonx.ai, IBM Bob, IBM Cloud] |
-| **Databases** | [e.g., PostgreSQL, Redis] |
-| **Other** | [e.g., Docker, GitHub Actions] |
+| **Languages** | Python, TypeScript |
+| **Frameworks** | FastAPI, React |
+| **IBM Technologies** | watsonx.ai, IBM Bob |
+| **Databases** | PostgreSQL |
+| **Other** | Docker, GitHub Actions |
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-├── src/                  # All source code
+├── src/                  # All source code (including .env.example)
 ├── docs/                 # Written documentation
 │   ├── problem-statement.md
 │   ├── solution-overview.md
@@ -66,6 +62,7 @@
 │   ├── screenshots/      # App screenshots
 │   └── demo-video-link.txt  # Link to demo video
 ├── presentation/         # Slide deck
+├── .env.example          # Environment variable template (NEVER commit .env)
 └── submission.yaml       # Structured submission metadata
 ```
 
@@ -116,6 +113,6 @@ cp .env.example .env
 
 ## 🏅 What We're Most Proud Of
 
-[Tell the judges what part of your submission is strongest and worth paying close attention to.]
+Bob Copilot's predictive maintenance capability that leverages HUMS sensor data to identify potential failures weeks before they occur, enabling data-driven maintenance decisions and reducing the US military's $90B/year maintenance burden.
 
 ---
