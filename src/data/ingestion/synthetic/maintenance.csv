@@ -1,0 +1,351 @@
+asset_id,maintenance_date,maintenance_type,component,description,maintenance_status
+ENG-001,2025-01-29,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-001,2025-04-15,COMPONENT_REPLACEMENT,Oil System,Component replacement completed,COMPLETED
+ENG-001,2025-06-23,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-002,2025-02-14,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-002,2025-05-30,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-002,2025-08-22,CORRECTIVE,Bearings,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-002,2026-01-06,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-003,2025-02-28,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-003,2025-07-21,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-003,2025-10-04,INSPECTION,Fan,Routine engine inspection completed,COMPLETED
+ENG-003,2026-02-04,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-003,2026-05-29,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-004,2025-03-01,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-004,2025-07-27,COMPONENT_REPLACEMENT,Oil System,Component replacement completed,COMPLETED
+ENG-005,2025-03-12,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-005,2025-06-02,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-005,2025-10-24,CORRECTIVE,Bearings,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-006,2025-02-27,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-006,2025-07-11,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-006,2025-10-06,INSPECTION,Fan,Routine engine inspection completed,COMPLETED
+ENG-006,2026-03-04,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-007,2025-03-10,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-007,2025-06-15,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-007,2025-08-13,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-007,2026-01-13,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-007,2026-05-02,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-008,2025-03-22,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-008,2025-07-26,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-009,2025-02-19,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-009,2025-06-14,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-009,2025-09-12,INSPECTION,Fan,Routine engine inspection completed,COMPLETED
+ENG-010,2025-03-08,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-010,2025-05-22,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-010,2025-08-29,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-010,2025-11-26,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-011,2025-02-18,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-011,2025-04-28,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-011,2025-07-31,COMPONENT_REPLACEMENT,Bearings,Component replacement completed,COMPLETED
+ENG-011,2025-11-12,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-011,2026-03-01,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-012,2025-01-27,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-012,2025-06-16,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-013,2025-03-26,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-013,2025-06-30,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-013,2025-09-02,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-014,2025-02-08,COMPONENT_REPLACEMENT,Compressor,Component replacement completed,COMPLETED
+ENG-014,2025-04-07,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-014,2025-06-24,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-014,2025-11-06,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-015,2025-02-19,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-015,2025-04-26,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-015,2025-07-22,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-015,2025-10-05,COMPONENT_REPLACEMENT,Compressor,Component replacement completed,COMPLETED
+ENG-015,2026-02-12,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-016,2025-03-28,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-016,2025-08-25,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-017,2025-01-25,COMPONENT_REPLACEMENT,Compressor,Component replacement completed,COMPLETED
+ENG-017,2025-03-25,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-017,2025-07-25,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-018,2025-03-07,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-018,2025-05-08,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-018,2025-07-20,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-018,2025-11-12,COMPONENT_REPLACEMENT,Compressor,Component replacement completed,COMPLETED
+ENG-019,2025-03-03,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-019,2025-05-23,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-019,2025-10-19,CORRECTIVE,Turbine,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-019,2026-01-24,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-019,2026-04-25,CORRECTIVE,Fuel System,Scheduled inspection,SCHEDULED
+ENG-020,2025-02-12,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-020,2025-04-25,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-021,2025-03-19,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-021,2025-06-24,COMPONENT_REPLACEMENT,Fuel System,Component replacement completed,COMPLETED
+ENG-021,2025-11-05,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-022,2025-01-27,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-022,2025-06-12,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-022,2025-08-12,CORRECTIVE,Turbine,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-022,2026-01-06,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-023,2025-02-18,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-023,2025-05-26,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-023,2025-09-30,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-023,2026-01-09,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-023,2026-03-13,INSPECTION,Oil System,Scheduled maintenance cancelled,CANCELLED
+ENG-024,2025-03-23,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-024,2025-06-19,COMPONENT_REPLACEMENT,Fuel System,Component replacement completed,COMPLETED
+ENG-025,2025-03-03,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-025,2025-05-06,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-025,2025-08-15,CORRECTIVE,Turbine,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-026,2025-03-16,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-026,2025-06-09,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-026,2025-10-23,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-026,2026-02-05,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-027,2025-01-30,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-027,2025-05-06,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-027,2025-08-27,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-027,2025-12-05,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-027,2026-03-24,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-028,2025-03-03,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-028,2025-06-25,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-029,2025-03-30,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-029,2025-06-27,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-029,2025-09-29,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-030,2025-03-30,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-030,2025-07-18,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-030,2025-09-28,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-030,2026-02-23,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-031,2025-02-12,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-031,2025-06-24,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-031,2025-11-14,COMPONENT_REPLACEMENT,Turbine,Component replacement completed,COMPLETED
+ENG-031,2026-01-22,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-031,2026-06-14,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-032,2025-03-15,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-032,2025-06-24,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-033,2025-02-21,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-033,2025-06-30,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-033,2025-09-28,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-034,2025-02-18,COMPONENT_REPLACEMENT,Combustor,Component replacement completed,COMPLETED
+ENG-034,2025-07-16,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-034,2025-10-03,INSPECTION,Turbine,Routine engine inspection completed,COMPLETED
+ENG-034,2026-02-28,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-035,2025-03-13,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-035,2025-07-16,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-035,2025-12-17,PREVENTIVE,Bearings,Preventive maintenance completed per service schedule,COMPLETED
+ENG-035,2026-05-09,COMPONENT_REPLACEMENT,Combustor,Component replacement completed,COMPLETED
+ENG-035,2026-07-10,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-036,2025-03-11,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-036,2025-08-01,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-037,2025-03-09,COMPONENT_REPLACEMENT,Combustor,Component replacement completed,COMPLETED
+ENG-037,2025-07-11,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-037,2025-11-13,INSPECTION,Turbine,Routine engine inspection completed,COMPLETED
+ENG-038,2025-01-29,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-038,2025-04-05,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-038,2025-06-07,PREVENTIVE,Bearings,Preventive maintenance completed per service schedule,COMPLETED
+ENG-038,2025-08-18,COMPONENT_REPLACEMENT,Combustor,Scheduled inspection,SCHEDULED
+ENG-039,2024-12-20,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-039,2025-05-22,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-039,2025-10-23,CORRECTIVE,Fan,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-039,2026-03-25,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-039,2026-08-20,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-040,2025-02-14,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-040,2025-04-13,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-041,2025-01-27,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-041,2025-05-08,COMPONENT_REPLACEMENT,LPC,Component replacement completed,COMPLETED
+ENG-041,2025-10-03,PREVENTIVE,Bearings,Preventive maintenance completed per service schedule,COMPLETED
+ENG-042,2025-02-02,CORRECTIVE,HPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-042,2025-04-29,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-042,2025-07-01,CORRECTIVE,Fan,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-042,2025-09-28,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-043,2025-01-27,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-043,2025-05-03,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-043,2025-07-24,INSPECTION,Turbine,Routine engine inspection completed,COMPLETED
+ENG-043,2025-09-18,CORRECTIVE,HPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-043,2026-01-13,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-044,2025-03-17,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-044,2025-07-01,COMPONENT_REPLACEMENT,LPC,Component replacement completed,COMPLETED
+ENG-045,2025-01-22,CORRECTIVE,HPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-045,2025-04-17,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-045,2025-08-29,CORRECTIVE,Fan,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-046,2025-02-05,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-046,2025-04-22,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-046,2025-08-12,INSPECTION,Turbine,Routine engine inspection completed,COMPLETED
+ENG-046,2025-11-09,CORRECTIVE,HPC,Scheduled maintenance cancelled,CANCELLED
+ENG-047,2025-02-19,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-047,2025-05-16,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-047,2025-09-19,PREVENTIVE,Bearings,Preventive maintenance completed per service schedule,COMPLETED
+ENG-047,2026-01-02,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-047,2026-05-26,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-048,2025-02-25,CORRECTIVE,HPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-048,2025-06-16,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-049,2025-03-17,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-049,2025-07-19,CORRECTIVE,Oil System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-049,2025-12-08,INSPECTION,Turbine,Routine engine inspection completed,COMPLETED
+ENG-050,2025-01-21,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-050,2025-04-30,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-050,2025-07-20,PREVENTIVE,Bearings,Preventive maintenance completed per service schedule,COMPLETED
+ENG-050,2025-09-23,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-051,2025-03-28,CORRECTIVE,HPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-051,2025-06-10,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-051,2025-10-21,COMPONENT_REPLACEMENT,Fan,Component replacement completed,COMPLETED
+ENG-051,2026-02-06,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-051,2026-06-20,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-052,2025-02-26,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-052,2025-06-27,CORRECTIVE,Oil System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-053,2025-02-10,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-053,2025-06-19,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-053,2025-10-04,PREVENTIVE,Bearings,Preventive maintenance completed per service schedule,COMPLETED
+ENG-054,2025-02-05,COMPONENT_REPLACEMENT,HPC,Component replacement completed,COMPLETED
+ENG-054,2025-04-02,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-054,2025-05-31,INSPECTION,Fan,Routine engine inspection completed,COMPLETED
+ENG-054,2025-08-27,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-055,2025-03-25,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-055,2025-07-26,CORRECTIVE,Oil System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-055,2025-10-13,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-055,2025-12-19,COMPONENT_REPLACEMENT,HPC,Component replacement completed,COMPLETED
+ENG-055,2026-03-02,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-056,2025-02-08,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-056,2025-04-04,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-057,2025-02-13,COMPONENT_REPLACEMENT,HPC,Component replacement completed,COMPLETED
+ENG-057,2025-05-13,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-057,2025-07-30,INSPECTION,Fan,Scheduled inspection,SCHEDULED
+ENG-058,2025-03-05,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-058,2025-07-12,CORRECTIVE,Oil System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-058,2025-11-21,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-058,2026-02-26,COMPONENT_REPLACEMENT,HPC,Component replacement completed,COMPLETED
+ENG-059,2025-03-02,PREVENTIVE,Compressor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-059,2025-08-03,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-059,2026-01-01,CORRECTIVE,Bearings,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-059,2026-04-23,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-059,2026-08-01,CORRECTIVE,Oil System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-060,2025-03-24,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-060,2025-06-28,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-061,2025-01-21,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-061,2025-04-29,COMPONENT_REPLACEMENT,Oil System,Component replacement completed,COMPLETED
+ENG-061,2025-07-26,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-062,2025-03-14,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-062,2025-06-23,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-062,2025-08-24,CORRECTIVE,Bearings,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-062,2025-11-03,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-063,2025-03-03,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-063,2025-04-27,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-063,2025-09-16,INSPECTION,Fan,Routine engine inspection completed,COMPLETED
+ENG-063,2025-12-31,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-063,2026-04-01,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-064,2025-02-04,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-064,2025-04-28,COMPONENT_REPLACEMENT,Oil System,Component replacement completed,COMPLETED
+ENG-065,2025-02-06,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-065,2025-04-25,INSPECTION,LPC,Routine engine inspection completed,COMPLETED
+ENG-065,2025-08-11,CORRECTIVE,Bearings,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-066,2025-03-10,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-066,2025-08-06,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-066,2025-11-19,INSPECTION,Fan,Routine engine inspection completed,COMPLETED
+ENG-066,2026-01-26,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-067,2025-02-15,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-067,2025-06-21,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-067,2025-08-29,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-067,2025-12-29,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-067,2026-03-22,PREVENTIVE,Fuel System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-068,2025-03-17,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-068,2025-05-23,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-069,2025-02-04,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-069,2025-04-06,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-069,2025-06-24,INSPECTION,Fan,Scheduled maintenance cancelled,CANCELLED
+ENG-070,2025-03-25,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-070,2025-06-03,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-070,2025-07-28,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-070,2025-12-21,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-071,2025-02-13,CORRECTIVE,Compressor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-071,2025-05-29,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-071,2025-10-01,COMPONENT_REPLACEMENT,Bearings,Component replacement completed,COMPLETED
+ENG-071,2026-01-30,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-071,2026-06-30,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-072,2025-03-20,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-072,2025-07-28,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-073,2025-01-26,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-073,2025-04-01,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-073,2025-07-02,PREVENTIVE,Turbine,Preventive maintenance completed per service schedule,COMPLETED
+ENG-074,2025-02-13,COMPONENT_REPLACEMENT,Compressor,Component replacement completed,COMPLETED
+ENG-074,2025-05-24,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-074,2025-09-18,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-074,2026-01-23,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-075,2025-03-22,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-075,2025-05-30,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-075,2025-10-02,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-075,2025-12-10,COMPONENT_REPLACEMENT,Compressor,Component replacement completed,COMPLETED
+ENG-075,2026-03-13,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-076,2025-03-08,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-076,2025-07-04,INSPECTION,Oil System,Scheduled inspection,SCHEDULED
+ENG-077,2025-03-29,COMPONENT_REPLACEMENT,Compressor,Component replacement completed,COMPLETED
+ENG-077,2025-08-25,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-077,2025-11-25,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-078,2025-01-22,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-078,2025-05-08,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-078,2025-09-29,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-078,2026-01-18,COMPONENT_REPLACEMENT,Compressor,Component replacement completed,COMPLETED
+ENG-079,2025-03-17,PREVENTIVE,Combustor,Preventive maintenance completed per service schedule,COMPLETED
+ENG-079,2025-07-18,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-079,2025-11-10,CORRECTIVE,Turbine,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-079,2026-03-24,INSPECTION,HPC,Routine engine inspection completed,COMPLETED
+ENG-079,2026-06-24,CORRECTIVE,Fuel System,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-080,2025-03-19,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-080,2025-07-24,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-081,2025-03-06,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-081,2025-06-11,COMPONENT_REPLACEMENT,Fuel System,Component replacement completed,COMPLETED
+ENG-081,2025-09-01,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-082,2025-03-27,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-082,2025-06-08,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-082,2025-08-05,CORRECTIVE,Turbine,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-082,2025-10-17,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-083,2025-02-22,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-083,2025-04-23,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-083,2025-09-17,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-083,2025-11-24,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-083,2026-04-13,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-084,2025-01-30,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-084,2025-04-29,COMPONENT_REPLACEMENT,Fuel System,Component replacement completed,COMPLETED
+ENG-085,2025-03-24,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-085,2025-05-19,INSPECTION,Oil System,Routine engine inspection completed,COMPLETED
+ENG-085,2025-09-01,CORRECTIVE,Turbine,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-086,2025-03-19,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-086,2025-07-13,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-086,2025-10-30,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-086,2026-02-08,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-087,2025-03-30,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-087,2025-06-11,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-087,2025-09-12,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-087,2026-01-16,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-087,2026-04-13,PREVENTIVE,LPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-088,2025-02-22,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-088,2025-04-20,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-089,2025-02-13,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-089,2025-05-23,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-089,2025-10-06,INSPECTION,Bearings,Routine engine inspection completed,COMPLETED
+ENG-090,2025-02-20,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-090,2025-04-29,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-090,2025-09-23,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-090,2025-12-15,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-091,2025-02-01,CORRECTIVE,Combustor,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-091,2025-07-02,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-091,2025-10-30,COMPONENT_REPLACEMENT,Turbine,Component replacement completed,COMPLETED
+ENG-091,2026-01-17,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-091,2026-04-27,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-092,2025-02-07,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-092,2025-07-03,CORRECTIVE,LPC,Scheduled maintenance cancelled,CANCELLED
+ENG-093,2025-02-28,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-093,2025-05-17,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-093,2025-08-24,PREVENTIVE,Fan,Preventive maintenance completed per service schedule,COMPLETED
+ENG-094,2025-02-19,COMPONENT_REPLACEMENT,Combustor,Component replacement completed,COMPLETED
+ENG-094,2025-04-20,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-094,2025-07-31,INSPECTION,Turbine,Routine engine inspection completed,COMPLETED
+ENG-094,2025-10-02,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-095,2025-03-25,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-095,2025-08-06,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-095,2025-11-13,PREVENTIVE,Bearings,Preventive maintenance completed per service schedule,COMPLETED
+ENG-095,2026-04-02,COMPONENT_REPLACEMENT,Combustor,Component replacement completed,COMPLETED
+ENG-095,2026-06-03,PREVENTIVE,Oil System,Scheduled inspection,SCHEDULED
+ENG-096,2025-03-11,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-096,2025-05-07,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-097,2025-02-11,COMPONENT_REPLACEMENT,Combustor,Component replacement completed,COMPLETED
+ENG-097,2025-04-08,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
+ENG-097,2025-06-06,INSPECTION,Turbine,Routine engine inspection completed,COMPLETED
+ENG-098,2025-02-13,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-098,2025-07-12,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-098,2025-11-12,PREVENTIVE,Bearings,Preventive maintenance completed per service schedule,COMPLETED
+ENG-098,2026-02-13,COMPONENT_REPLACEMENT,Combustor,Component replacement completed,COMPLETED
+ENG-099,2025-03-29,PREVENTIVE,HPC,Preventive maintenance completed per service schedule,COMPLETED
+ENG-099,2025-07-13,INSPECTION,Fuel System,Routine engine inspection completed,COMPLETED
+ENG-099,2025-09-19,CORRECTIVE,Fan,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-099,2026-02-01,INSPECTION,Compressor,Routine engine inspection completed,COMPLETED
+ENG-099,2026-06-06,CORRECTIVE,LPC,Corrective maintenance after abnormal operating condition,COMPLETED
+ENG-100,2025-02-14,INSPECTION,Combustor,Routine engine inspection completed,COMPLETED
+ENG-100,2025-06-19,PREVENTIVE,Oil System,Preventive maintenance completed per service schedule,COMPLETED
