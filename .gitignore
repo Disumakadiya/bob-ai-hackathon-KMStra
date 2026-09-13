@@ -14,7 +14,7 @@ secrets/
 
 # ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
-*.py[cod]
+
 *.pyo
 .Python
 venv/
@@ -83,9 +83,16 @@ demo/*.avi
 demo/*.mkv
 
 # ── Docker volumes / local data ───────────────────────────────────────────────
-data/
 logs/
 *.log
+
+# ── Project datasets & generated artifacts ────────────────────────────────────
+# Raw NASA C-MAPSS dataset files (large text; readme.txt stays tracked)
+src/data/ingestion/nasa/train_FD001.txt
+src/data/ingestion/nasa/test_FD001.txt
+src/data/ingestion/nasa/RUL_FD001.txt
+# Generated FD001 preprocessed CSVs (recreated from raw + scripts)
+src/data/preprocessing/*.csv
 
 # ── Jupyter Notebooks (optional: remove if you want to commit notebooks) ──────
 # .ipynb_checkpoints/
