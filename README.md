@@ -11,7 +11,7 @@
 | **Team Name** | Bob Copilot |
 | **Track** | Defense & Aerospace - Mission Readiness & Predictive Maintenance |
 | **Team Lead** | Disu Makadiya — disu.makadiya@ibm.com |
-| **Members** | Vaibhavi Karia, Pushti Kansara, Rutvi Shah |
+| **Members** | Vaibhavi Kariya, Pushti Kansara, Rutvi Shah |
 
 ---
 
