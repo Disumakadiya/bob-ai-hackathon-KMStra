@@ -1,0 +1,37 @@
+# requirements.txt
+# Project: IBM-BOB AI — Predictive Maintenance (NASA C-MAPSS FD001)
+#
+# Direct third-party dependencies only.
+# Transitive dependencies (scipy, threadpoolctl, python-dateutil, etc.)
+# are resolved automatically by pip from the entries below.
+#
+# Verified against: Python 3.13
+# Packages confirmed by import-scanning all files under src/
+#
+# Usage:
+#   python -m pip install -r requirements.txt
+
+# -----------------------------------------------------------------------
+# Core numerical / data
+# -----------------------------------------------------------------------
+numpy==2.5.1           # used by: feature_engineering, validation, anomaly_detector,
+                       #          train.py, failure_labeling.py, failure_scoring.py,
+                       #          health_scoring.py
+pandas==3.0.5          # used by: load_nasa, preprocess_nasa, feature_engineering,
+                       #          validation, anomaly_detector, train_anomaly,
+                       #          health_scoring, failure_labeling, train.py,
+                       #          failure_prediction, failure_scoring
+
+# -----------------------------------------------------------------------
+# Machine learning
+# -----------------------------------------------------------------------
+scikit-learn==1.9.0    # used by: anomaly_detector (IsolationForest),
+                       #          train.py (classification_report, confusion_matrix,
+                       #                   roc_auc_score)
+xgboost==3.4.1         # used by: train.py, failure_prediction.py (XGBClassifier)
+
+# -----------------------------------------------------------------------
+# Model serialization
+# -----------------------------------------------------------------------
+joblib==1.5.3          # used by: anomaly_detector (dump/load),
+                       #          train.py, failure_prediction.py (save_model/load_model)
