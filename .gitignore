@@ -99,14 +99,34 @@ src/data/preprocessing/*.csv
 # Trained model binaries & generated health/anomaly score CSVs (recreated by training scripts)
 src/models/health/*.joblib
 src/models/health/*.csv
+
 # Trained failure model binary & integration test cache (Member 2 -- recreated by train.py)
 src/models/failure/*.joblib
 src/models/failure/__pycache__/
+=======
+
 
 # ── Jupyter Notebooks (optional: remove if you want to commit notebooks) ──────
 # .ipynb_checkpoints/
 
 # ── Terraform ─────────────────────────────────────────────────────────────────
 .terraform/
+
 *.tfstate
 *.tfstate.backup
+=======
+*.tfstate.backup
+
+# ── Frontend (Vite/React) ─────────────────────────────────────────────────────
+src/frontend/dist
+src/frontend/dist-ssr
+src/frontend/*.local
+src/frontend/logs
+src/frontend/*.log
+src/frontend/npm-debug.log*
+src/frontend/yarn-debug.log*
+src/frontend/yarn-error.log*
+src/frontend/pnpm-debug.log*
+src/frontend/lerna-debug.log*
+src/frontend/node_modules
+
