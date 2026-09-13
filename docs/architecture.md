@@ -1,49 +1,63 @@
-# Architecture
+# Architecture: Proposed Mission Readiness Copilot
 
 ## System Architecture
 
-[Describe the overall architecture of your system. Replace the Mermaid diagram below with your actual architecture.]
+The diagram describes the proposed analytical architecture. No pipeline, model,
+API, dashboard, or database is currently implemented in this repository.
 
 ```mermaid
 graph TD
-    A[User / Browser] -->|HTTP| B[Frontend - React]
-    B -->|REST API| C[Backend - FastAPI]
-    C -->|SDK| D[watsonx.ai]
-    C -->|Query| E[PostgreSQL]
-    C -->|Publish| F[Slack Webhook]
-    D -->|Inference Result| C
+    A[NASA C-MAPSS sensor and RUL data] --> B[Data preprocessing]
+    C[Synthetic asset, maintenance, and mission context] --> B
+    B --> D[Asset health and anomaly detection<br/>Isolation Forest]
+    B --> E[Component failure prediction<br/>XGBoost classifier]
+    B --> F[Remaining useful life prediction<br/>XGBoost regressor]
+    D --> G[SHAP explanations]
+    E --> G
+    F --> G
+    G --> H[Mission readiness engine]
+    C --> H
+    H --> I[Maintenance prioritization]
+    I --> J[Copilot-facing readiness and action summary]
 ```
 
 ## Components
 
-| Component | Technology | Responsibility |
-|---|---|---|
-| Frontend | [e.g., React 18] | [e.g., Dashboard UI, user interaction] |
-| Backend API | [e.g., FastAPI] | [e.g., Business logic, orchestration] |
-| AI / ML | [e.g., watsonx.ai] | [e.g., Anomaly scoring, classification] |
-| Database | [e.g., PostgreSQL] | [e.g., Storing pipeline events and scores] |
-| Notifications | [e.g., Slack API] | [e.g., Alerting on threshold breaches] |
+| Component                    | Technology                         | Responsibility                                                                                      |
+| ---------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
+| NASA C-MAPSS data            | Public turbofan simulation dataset | Initial real source for sensor/degradation and RUL information; FD001 is the initial focus.         |
+| Supporting operational data  | Synthetic, planned                 | Asset metadata, maintenance/service history, mission schedule, and criticality.                     |
+| Preprocessing                | Planned Python data workflow       | Align time/cycle observations, validate inputs, and prevent temporal leakage.                       |
+| Asset health                 | Planned Isolation Forest           | Produce an anomaly signal for unusual asset behavior.                                               |
+| Failure risk                 | Planned XGBoost classifier         | Estimate component failure probability over a defined future horizon.                               |
+| RUL                          | Planned XGBoost regressor          | Estimate remaining useful life and compare it with mission timing.                                  |
+| Explainability               | Planned SHAP                       | Describe feature contributions to risk and RUL outputs.                                             |
+| Readiness and prioritization | Planned decision layer             | Combine predictions with mission context and criticality into conceptual labels and action ranking. |
 
 ## Data Flow
 
-[Describe how data moves through your system from input to output.]
+The intended end-to-end flow is:
 
-1. [e.g., Pipeline logs are ingested via a webhook from GitHub Actions]
-2. [e.g., Logs are preprocessed and chunked into 512-token segments]
-3. [e.g., Each chunk is sent to the watsonx.ai inference endpoint]
-4. [e.g., Anomaly scores are stored in PostgreSQL]
-5. [e.g., The React dashboard polls the API every 30 seconds to refresh]
+1. Load NASA C-MAPSS observations and RUL information, then associate them conceptually with synthetic operational records through `asset_id` and time/cycle context.
+2. Validate and transform time-ordered features without using future maintenance or failure information for an earlier prediction.
+3. Generate anomaly, failure-risk, and RUL outputs with the planned models.
+4. Generate human-readable SHAP explanations for the model outputs.
+5. Combine outputs with mission timing, criticality, and maintenance history to support conceptual readiness labels such as Mission Ready, At Risk, Maintenance Required, and Not Mission Ready.
+6. Present prioritized maintenance actions through a future copilot interface.
 
 ## Security Considerations
 
-[Note any security decisions relevant to the architecture — even if basic.]
+Because no application is implemented, these are design requirements for a future
+implementation rather than verified controls.
 
-- [e.g., API keys stored in environment variables, never committed to git]
-- [e.g., All API routes require a Bearer token]
-- [e.g., Database credentials rotated via IBM Secrets Manager]
+- Keep credentials and connection strings outside source control.
+- Restrict access to operational records and avoid exposing sensitive asset or mission details in explanations.
+- Preserve dataset provenance and distinguish public C-MAPSS data from synthetic supporting data.
+- Audit model inputs, prediction time, model version, and recommendation rationale.
 
 ## Scalability Notes
 
-[Optional: how would this scale beyond the hackathon prototype?]
-
-[e.g., "The FastAPI backend is stateless and could be horizontally scaled behind a load balancer. The watsonx.ai calls are the bottleneck and would benefit from request batching."]
+Future scaling would require an orchestrated batch or streaming data workflow,
+versioned models, reproducible feature computation, monitoring for drift, and an
+access-controlled serving layer. No scalability or performance result is claimed
+for the current documentation-only repository.

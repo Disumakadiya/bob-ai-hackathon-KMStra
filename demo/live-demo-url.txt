@@ -1,4 +1,4 @@
-https://your-live-demo-url-here.com
+NOT DEPLOYED — review the project documentation locally; no application is implemented yet.
 
 Replace the URL above with a link to your live/deployed demo.
 

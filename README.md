@@ -1,6 +1,6 @@
-# 🚀 Bob Copilot - Mission Readiness & Predictive Maintenance
+# Mission Readiness & Predictive Maintenance Copilot
 
-> ⚠️ **Replace everything in `[ ]` brackets with your actual content before submission.**
+> Documentation-stage Bobathon submission. The repository currently contains the project concept and submission documentation; implementation artifacts are not included yet.
 
 ---
 
@@ -9,31 +9,31 @@
 | Field | Value |
 |---|---|
 | **Team Name** | Bob Copilot |
-| **Track** | Defense & Aerospace - Mission Readiness & Predictive Maintenance |
+| **Track** | AI |
 | **Team Lead** | Disu Makadiya — disu.makadiya@ibm.com |
-| **Members** | Vaibhavi Karia, Pushti Kansara, Rutvi Shah |
+| **Members** | Vaibhavi Kariya, Pushti Kansara, Rutvi Shah |
 
 ---
 
 ## 🎯 Problem Statement
 
-Military organisations cannot reliably determine whether aircraft, vehicles, and equipment are mission-ready. Maintenance runs on fixed calendar schedules regardless of actual component condition. HUMS (Health & Usage Monitoring System) sensor data that could predict failures weeks in advance sits unanalysed. When platforms fail unexpectedly, operational readiness drops and recovery takes weeks. The US military spends $90B/year on maintenance — shifting to predictive approaches saves billions.
+Maintenance and operations teams need to determine whether aircraft, vehicles, and other mission-critical equipment can meet an upcoming mission window. Sensor/HUMS data and maintenance history may contain early degradation signals, but those signals are difficult to connect to component risk, remaining useful life (RUL), mission timing, and maintenance priority. This project defines a copilot concept that turns those inputs into explainable readiness information without claiming validated operational results.
 
 ---
 
 ## 💡 Solution
 
-Bob Copilot ingests sensor data and service records to identify non-ready assets, explain each readiness issue, predict which components will fail before the next mission window, and recommend a prioritised maintenance plan. The solution leverages HUMS sensor data and service records to shift from fixed-schedule maintenance to predictive approaches, potentially saving billions in annual maintenance costs.
+The proposed Mission Readiness & Predictive Maintenance Copilot combines NASA C-MAPSS degradation/RUL data with clearly identified synthetic operational context such as asset metadata, maintenance history, and mission schedules. It is designed to use anomaly detection, component failure prediction, RUL prediction, SHAP explanations, and a mission-readiness prioritization layer. These are planned capabilities; this repository does not currently contain the implemented pipeline or validated model results.
 
 ---
 
 ## ✨ Key Features
 
-- **Real-time Asset Readiness Assessment**: Identify non-ready assets using sensor data and service records
-- **Failure Prediction**: Predict which components will fail before the next mission window using HUMS sensor data
-- **Root Cause Explanation**: Explain each readiness issue with detailed diagnostics
-- **Prioritised Maintenance Planning**: Recommend a prioritised maintenance plan based on failure risk and operational impact
-- **HUMS Data Integration**: Leverage Health & Usage Monitoring System sensor data for predictive analytics
+- **Asset health and anomaly assessment**: Planned Isolation Forest signal for unusual sensor patterns
+- **Component failure risk**: Planned XGBoost classifier for a defined future prediction horizon
+- **RUL estimation**: Planned XGBoost regressor based initially on NASA C-MAPSS FD001
+- **Explainable recommendations**: Planned SHAP explanations for risk and RUL drivers
+- **Mission-aware prioritization**: Planned ranking using risk, RUL, criticality, urgency, and readiness impact
 
 ---
 
@@ -41,11 +41,13 @@ Bob Copilot ingests sensor data and service records to identify non-ready assets
 
 | Category | Technologies |
 |---|---|
-| **Languages** | Python, TypeScript |
-| **Frameworks** | FastAPI, React |
-| **IBM Technologies** | watsonx.ai, IBM Bob |
-| **Databases** | PostgreSQL |
-| **Other** | Docker, GitHub Actions |
+| **Documentation / metadata** | Markdown, YAML |
+| **Repository tooling present** | GitHub Actions validation workflow |
+| **Development partner** | IBM Bob, used for planning and documentation workflow |
+| **Planned analytical technologies** | Python, Pandas, NumPy, scikit-learn, XGBoost, SHAP |
+| **Planned data** | NASA C-MAPSS; synthetic supporting operational context |
+
+No application framework, database, API, dashboard, container, or ML dependency is implemented in this repository yet.
 
 ---
 
@@ -70,22 +72,11 @@ Bob Copilot ingests sensor data and service records to identify non-ready assets
 
 ## ⚡ How to Run
 
-> **Copy these exact steps from your [`docs/setup-guide.md`](docs/setup-guide.md)**
+> There is no runnable application or dependency manifest in the current repository. See [`docs/setup-guide.md`](docs/setup-guide.md) for the documentation-stage status and future implementation prerequisites.
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/[your-repo].git
-cd [your-repo]
-
-# 2. Install dependencies
-[your install command here]
-
-# 3. Configure environment
-cp .env.example .env
-# Edit .env with your values
-
-# 4. Run the project
-[your run command here]
+# No install or run command is available yet.
+# The repository currently contains documentation and submission metadata only.
 ```
 
 ---
@@ -105,14 +96,15 @@ cp .env.example .env
 
 > Be honest — judges appreciate transparency over overclaiming.
 
-- [Limitation 1: e.g., "Authentication is mocked — not production-ready"]
-- [Limitation 2: e.g., "Only tested on Chrome"]
-- [Limitation 3: e.g., "Feature X is scaffolded but not fully implemented"]
+- No source implementation, model artifacts, training pipeline, tests, dashboard, API, or dependency manifest is present.
+- No real operational aircraft, vehicle, or equipment data is included; C-MAPSS is a public turbofan simulation dataset and operational support data is planned as synthetic.
+- No metrics, SHAP plots, readiness thresholds, deployment results, screenshots, presentation deck, or demo video are available.
+- Readiness labels and maintenance rankings are conceptual and have not been scientifically validated.
 
 ---
 
 ## 🏅 What We're Most Proud Of
 
-Bob Copilot's predictive maintenance capability that leverages HUMS sensor data to identify potential failures weeks before they occur, enabling data-driven maintenance decisions and reducing the US military's $90B/year maintenance burden.
+The strongest aspect is the clear separation between real NASA C-MAPSS degradation/RUL data, synthetic operational context, and proposed mission-readiness logic. The design also keeps IBM Bob in its proper role as the AI development partner rather than misrepresenting it as the predictive model.
 
 ---
