@@ -12,6 +12,8 @@
 *.p12
 secrets/
 
+models/
+
 # ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
 
@@ -29,6 +31,7 @@ build/
 .ruff_cache/
 *.coverage
 htmlcov/
+
 
 # ── Node.js ───────────────────────────────────────────────────────────────────
 node_modules/
@@ -93,11 +96,26 @@ src/data/ingestion/nasa/test_FD001.txt
 src/data/ingestion/nasa/RUL_FD001.txt
 # Generated FD001 preprocessed CSVs (recreated from raw + scripts)
 src/data/preprocessing/*.csv
+# Trained model binaries & generated health/anomaly score CSVs (recreated by training scripts)
+src/models/health/*.joblib
+src/models/health/*.csv
 
 # ── Jupyter Notebooks (optional: remove if you want to commit notebooks) ──────
 # .ipynb_checkpoints/
 
 # ── Terraform ─────────────────────────────────────────────────────────────────
 .terraform/
-*.tfstate
 *.tfstate.backup
+
+# ── Frontend (Vite/React) ─────────────────────────────────────────────────────
+src/frontend/dist
+src/frontend/dist-ssr
+src/frontend/*.local
+src/frontend/logs
+src/frontend/*.log
+src/frontend/npm-debug.log*
+src/frontend/yarn-debug.log*
+src/frontend/yarn-error.log*
+src/frontend/pnpm-debug.log*
+src/frontend/lerna-debug.log*
+src/frontend/node_modules
