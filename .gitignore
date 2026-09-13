@@ -12,6 +12,8 @@
 *.p12
 secrets/
 
+models/
+
 # ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
 
@@ -29,6 +31,7 @@ build/
 .ruff_cache/
 *.coverage
 htmlcov/
+
 
 # ── Node.js ───────────────────────────────────────────────────────────────────
 node_modules/
@@ -93,6 +96,12 @@ src/data/ingestion/nasa/test_FD001.txt
 src/data/ingestion/nasa/RUL_FD001.txt
 # Generated FD001 preprocessed CSVs (recreated from raw + scripts)
 src/data/preprocessing/*.csv
+# Trained model binaries & generated health/anomaly score CSVs (recreated by training scripts)
+src/models/health/*.joblib
+src/models/health/*.csv
+# Trained failure model binary & integration test cache (Member 2 -- recreated by train.py)
+src/models/failure/*.joblib
+src/models/failure/__pycache__/
 
 # ── Jupyter Notebooks (optional: remove if you want to commit notebooks) ──────
 # .ipynb_checkpoints/
