@@ -1,41 +1,50 @@
-# Solution Overview
+# Solution Overview: Mission Readiness & Predictive Maintenance Copilot
 
 ## What We Built
 
-[Describe your solution in plain language. Avoid jargon — write as if explaining to a smart colleague unfamiliar with your tech stack.]
+The proposed copilot is a decision-support layer for maintenance and operations
+teams. It is intended to turn condition-monitoring signals and maintenance context
+into an understandable assessment of mission readiness, likely failure risk,
+remaining useful life, and maintenance priority. This repository documents the
+concept; it does not contain the implementation.
 
 ## How It Works
 
-[Explain the core mechanism step by step. A numbered list or simple flow works well here.]
-
-1. [Step 1: e.g., "User connects their GitHub repository via OAuth"]
-2. [Step 2: e.g., "The system ingests pipeline logs and feeds them to watsonx.ai"]
-3. [Step 3: e.g., "An anomaly score is computed and displayed on the dashboard"]
-4. [Step 4: e.g., "Alerts are sent to Slack when the score exceeds a threshold"]
+1. Combine NASA C-MAPSS sensor/degradation and RUL information with clearly identified synthetic asset, maintenance, and mission context.
+2. Preprocess time-ordered observations while preventing future failure or maintenance information from leaking into an earlier prediction.
+3. Produce three planned analytical outputs: an Isolation Forest anomaly signal, an XGBoost component failure probability, and an XGBoost RUL estimate.
+4. Use SHAP to describe the features that influenced risk and RUL outputs.
+5. Combine model outputs with criticality, mission urgency, time to next mission, and maintenance history in a conceptual readiness and prioritization layer.
 
 ## Architecture Diagram
 
-> See [`architecture.md`](architecture.md) for the detailed diagram.
+See [`architecture.md`](architecture.md) for the detailed proposed architecture.
 
-[Optionally include a simple ASCII or Mermaid diagram here for quick reference.]
-
-```
-[User] → [Frontend: React] → [API: FastAPI] → [watsonx.ai] → [Dashboard]
-                                    ↓
-                             [PostgreSQL DB]
+```text
+Sensor / HUMS data + maintenance history + asset and mission context
+                              |
+                       Preprocessing and validation
+                              |
+      Anomaly signal + component failure risk + RUL estimate
+                              |
+                     SHAP explanations and context
+                              |
+              Mission readiness and maintenance priority
 ```
 
 ## Key Design Decisions
 
-| Decision | Rationale |
-|---|---|
-| [e.g., Used watsonx.ai for anomaly detection] | [e.g., Pre-trained models reduced time-to-value vs. building from scratch] |
-| [Decision 2] | [Rationale 2] |
-| [Decision 3] | [Rationale 3] |
+| Decision                                 | Rationale                                                                                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Start with NASA C-MAPSS FD001            | It provides a simpler initial setting with one operating condition and one fault mode compared with the other subsets.                |
+| Separate real and synthetic data         | C-MAPSS provides degradation/RUL information, while mission and business context must be represented separately and labeled honestly. |
+| Explain outputs before prioritizing work | Maintenance users need reasons and contributing factors, not only uncontextualized model scores.                                      |
 
 ## IBM Technologies Used
 
-[Explain specifically HOW you used each IBM technology — not just that you used it.]
+IBM Bob is used as the AI development partner for requirements analysis,
+repository planning, documentation, future development assistance, debugging,
+testing, review, and validation. It is not the predictive model. No IBM runtime
+or hosted inference service is implemented in the current repository.
 
-- **[IBM Tech 1, e.g., watsonx.ai]:** [How it was used — e.g., "Used the `ibm/granite-13b-instruct-v2` model via the Python SDK to classify anomaly types from log text."]
-- **[IBM Tech 2]:** [How it was used]
+- **IBM Bob:** Development partner used to shape and refine the proposed solution and its documentation.

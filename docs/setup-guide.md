@@ -4,76 +4,50 @@
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+The current repository is a documentation-stage submission. It does not contain
+an application, model pipeline, dependency manifest, test suite, or runnable
+entry point. Therefore there is no honest install or run command yet.
 
-- [ ] [e.g., Python 3.11+]
-- [ ] [e.g., Node.js 18+]
-- [ ] [e.g., Docker Desktop]
-- [ ] [e.g., An IBM Cloud account with watsonx.ai access]
+For reviewing the documentation, ensure you have the following installed:
+
+- [ ] Git
+- [ ] A Markdown viewer or GitHub account for reading the documents
+- [ ] A YAML parser if validating `submission.yaml` locally
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and fill in the values:
+No environment variables are required to read the current documentation. The
+existing `src/.env.example` is a generic template and does not represent a
+running application configuration; do not add secrets to it.
 
-```bash
-cp .env.example .env
-```
-
-| Variable | Description | Required |
-|---|---|---|
-| `WATSONX_API_KEY` | Your IBM watsonx.ai API key | Yes |
-| `WATSONX_PROJECT_ID` | Your watsonx.ai project ID | Yes |
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `SLACK_WEBHOOK_URL` | Slack webhook for alerts | No |
+| Variable | Description                                                      | Required |
+| -------- | ---------------------------------------------------------------- | -------- |
+| None     | No implemented runtime currently consumes environment variables. | No       |
 
 ## Installation
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/[your-org]/[your-repo].git
-cd [your-repo]
-
-# 2. Install backend dependencies
-[your command — e.g.: pip install -r requirements.txt]
-
-# 3. Install frontend dependencies (if applicable)
-[your command — e.g.: cd frontend && npm install]
-
-# 4. Set up the database (if applicable)
-[your command — e.g.: python manage.py migrate]
-```
+No dependency manifest or installation command exists yet.
 
 ## Running the Application
 
-```bash
-# Start the backend
-[your command — e.g.: uvicorn app.main:app --reload]
-
-# Start the frontend (in a separate terminal, if applicable)
-[your command — e.g.: cd frontend && npm run dev]
-```
-
-The application will be available at: `http://localhost:[PORT]`
+There is no application to start and no local URL to open.
 
 ## Running Tests
 
-```bash
-[your test command — e.g.: pytest tests/ -v]
-```
+No project test command is available yet.
 
 ## Quick Demo (Optional)
 
-If you have a demo script or sample data to showcase the project quickly:
+No demo script or sample data is included yet. The planned first development
+slice is NASA C-MAPSS FD001 preprocessing and RUL modeling, followed by the
+synthetic operational context and readiness layer.
 
-```bash
-[e.g.: python demo/seed_demo_data.py]
-[e.g.: open http://localhost:8000/demo]
-```
+Not applicable at the current documentation stage.
 
 ## Troubleshooting
 
-| Issue | Solution |
-|---|---|
-| [e.g., `ModuleNotFoundError`] | [e.g., Run `pip install -r requirements.txt` again] |
-| [e.g., Database connection refused] | [e.g., Ensure PostgreSQL is running: `docker compose up db`] |
-| [e.g., watsonx.ai 401 error] | [e.g., Check `WATSONX_API_KEY` in your `.env` file] |
+| Issue                      | Solution                                                             |
+| -------------------------- | -------------------------------------------------------------------- |
+| A run command is expected  | No application implementation or dependency manifest exists yet.     |
+| A model result is expected | No trained model, dataset download, or metric artifact is committed. |
+| A demo link is expected    | No demo video or deployed application URL has been provided.         |

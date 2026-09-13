@@ -1,25 +1,26 @@
 # Source Code
 
-Place all your project's source code in this folder.
+The source-code directory is reserved for the future implementation. It currently
+contains no application, model, notebook, test, or dependency files.
 
 ## 📊 Project: Bob Copilot - Defense & Aerospace
 
-| Field | Value |
-|---|---|
-| **Project Title** | Bob Copilot - Mission Readiness & Predictive Maintenance |
-| **Track** | Defense & Aerospace - Mission Readiness & Predictive Maintenance |
-| **Team Lead** | Disu Makadiya |
-| **Team Members** | Vaibhavi Karia, Pushti Kansara, Rutvi Shah |
-| **Problem** | Military organisations cannot reliably determine whether aircraft, vehicles, and equipment are mission-ready. Maintenance runs on fixed calendar schedules regardless of actual component condition. HUMS sensor data that could predict failures weeks in advance sits unanalysed. |
-| **Solution** | Bob Copilot ingests sensor data and service records to identify non-ready assets, explain each readiness issue, predict which components will fail before the next mission window, and recommend a prioritised maintenance plan. |
-| **Annual Maintenance Cost** | US military spends $90B/year on maintenance - shifting to predictive approaches saves billions |
+| Field                 | Value                                                                                                                                                      |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Project Title**     | Mission Readiness & Predictive Maintenance Copilot                                                                                                         |
+| **Track**             | Defense & Aerospace - Mission Readiness & Predictive Maintenance                                                                                           |
+| **Team Lead**         | Disu Makadiya                                                                                                                                              |
+| **Team Members**      | Vaibhavi Karia, Pushti Kansara, Rutvi Shah                                                                                                                 |
+| **Problem**           | Teams need to connect condition signals, maintenance history, mission timing, and criticality when assessing readiness.                                    |
+| **Proposed solution** | Use NASA C-MAPSS plus clearly identified synthetic operational context with planned anomaly, failure-risk, RUL, explainability, and prioritization layers. |
 
 ## Structure Guidelines
 
-Organize your code logically. Here are common patterns — use whatever fits
-your project:
+When implementation begins, organize the code around the data and model
+ownership boundaries below. These are target conventions, not current files:
 
 ### Web Application
+
 ```
 src/
   backend/        ← API server code
@@ -28,6 +29,7 @@ src/
 ```
 
 ### Data / AI Project
+
 ```
 src/
   data/           ← Data ingestion / preprocessing
@@ -37,6 +39,7 @@ src/
 ```
 
 ### CLI / Script-based Tool
+
 ```
 src/
   cli/            ← CLI entry points
@@ -44,9 +47,9 @@ src/
   utils/          ← Helpers
 ```
 
-## Important Files to Include
+## Intended Important Files to Include
 
-- `requirements.txt` or `package.json` — dependency manifest
+- `requirements.txt` — planned Python dependency manifest
 - `.env.example` — template for environment variables (NEVER commit `.env`)
 - Any database migration files
 - Configuration files
@@ -57,3 +60,6 @@ src/
 - Large binary files (use Git LFS or link externally)
 - `node_modules/` or `venv/` (these are in `.gitignore`)
 - Build artifacts (`dist/`, `build/`, `__pycache__/`)
+
+No implementation code or generated model results have been added as part of
+this documentation task.
