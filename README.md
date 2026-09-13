@@ -10,7 +10,7 @@
 |---|---|
 | **Team Name** | Bob Copilot |
 | **Track** | AI |
-| **Team Lead** | Disu Makadiya — disu.makadiya@ibm.com |
+| **Team Lead** | Disu Makadiya — disu.makadiya@gmail.com |
 | **Members** | Vaibhavi Kariya, Pushti Kansara, Rutvi Shah |
 
 ---
