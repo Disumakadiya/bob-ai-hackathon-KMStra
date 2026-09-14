@@ -370,6 +370,18 @@ function MissionIntelligence() {
                 <div style={{ height: '300px', width: '100%' }}>
                   <ResponsiveContainer>
                     <LineChart data={selectedTimeSeries}>
+                      <defs>
+                        <linearGradient id="colorHealth" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="var(--text-teal)" stopOpacity={1}/>
+                          <stop offset="50%" stopColor="var(--accent-copper)" stopOpacity={1}/>
+                          <stop offset="100%" stopColor="var(--text-error)" stopOpacity={1}/>
+                        </linearGradient>
+                        <linearGradient id="colorRisk" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="var(--text-error)" stopOpacity={1}/>
+                          <stop offset="50%" stopColor="var(--accent-copper)" stopOpacity={1}/>
+                          <stop offset="100%" stopColor="var(--text-teal)" stopOpacity={1}/>
+                        </linearGradient>
+                      </defs>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
                       <XAxis dataKey="cycle" stroke="var(--text-light)" fontSize={12} tickLine={false} axisLine={false} />
                       <YAxis yAxisId="left" stroke="var(--text-teal)" fontSize={12} tickLine={false} axisLine={false} />
@@ -379,8 +391,8 @@ function MissionIntelligence() {
                         formatter={(value, name) => [typeof value === 'number' ? value.toFixed(2) : value, name]}
                       />
                       <Legend iconType="circle" wrapperStyle={{ paddingTop: '1rem' }} />
-                      <Line yAxisId="left" type="monotone" dataKey="health" name="Health Score" stroke="var(--text-teal)" strokeWidth={3} dot={false} />
-                      <Line yAxisId="right" type="monotone" dataKey="risk" name="Failure Risk (%)" stroke="var(--accent-copper)" strokeWidth={3} dot={false} />
+                      <Line yAxisId="left" type="monotone" dataKey="health" name="Health Score" stroke="url(#colorHealth)" strokeWidth={3} dot={false} />
+                      <Line yAxisId="right" type="monotone" dataKey="risk" name="Failure Risk (%)" stroke="url(#colorRisk)" strokeWidth={3} dot={false} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
