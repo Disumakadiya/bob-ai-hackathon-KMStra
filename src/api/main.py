@@ -253,6 +253,73 @@ def get_asset_rul(asset_id: int) -> dict:
     }
 
 
+@app.get(
+    "/api/assets/{asset_id}/timeseries",
+    tags=["assets"],
+    summary="Get timeseries history for an asset",
+)
+def get_asset_timeseries(asset_id: str) -> list[dict]:
+    """Return historical time series data for charts."""
+    try:
+        if asset_id.startswith("ENG-"):
+            numeric_id = int(asset_id.replace("ENG-", ""))
+        else:
+            numeric_id = int(asset_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid asset_id format.")
+
+    import pandas as pd
+    import pathlib
+    
+    base_dir = pathlib.Path(__file__).resolve().parents[2]
+    health_path = base_dir / "src" / "models" / "health" / "health_scores.csv"
+    failure_path = base_dir / "src" / "models" / "failure" / "failure_scores.csv"
+    rul_path = base_dir / "src" / "models" / "rul" / "rul_predictions.csv"
+    
+    if not health_path.exists() or not failure_path.exists():
+         raise HTTPException(status_code=503, detail="Timeseries data not found.")
+    
+    df_health = pd.read_csv(health_path)
+    df_failure = pd.read_csv(failure_path)
+    
+    df_health = df_health[df_health["unit"] == numeric_id]
+    df_failure = df_failure[df_failure["unit"] == numeric_id]
+    
+    if df_health.empty:
+        raise HTTPException(status_code=404, detail=f"Asset {asset_id} not found in timeseries data.")
+        
+    df_merged = pd.merge(df_health, df_failure, on=["unit", "cycle"], how="left")
+    
+    if rul_path.exists():
+        df_rul = pd.read_csv(rul_path)
+        if "unit" in df_rul.columns:
+            df_rul = df_rul.rename(columns={"unit": "asset_id"})
+        if "asset_id" in df_rul.columns:
+            df_merged = pd.merge(
+                df_merged,
+                df_rul[["asset_id", "cycle", "predicted_rul"]],
+                left_on=["unit", "cycle"],
+                right_on=["asset_id", "cycle"],
+                how="left"
+            )
+    
+    records = []
+    for _, row in df_merged.iterrows():
+        record = {
+            "asset_id": asset_id,
+            "cycle": int(row["cycle"]),
+            "health_score": float(row["health_score"]) if pd.notna(row.get("health_score")) else -1,
+            "failure_probability": float(row["failure_probability"]) if pd.notna(row.get("failure_probability")) else -1,
+        }
+        if "predicted_rul" in row and pd.notna(row["predicted_rul"]):
+            record["predicted_rul"] = float(row["predicted_rul"])
+        else:
+            record["predicted_rul"] = -1
+        records.append(record)
+        
+    return records
+
+
 # ---------------------------------------------------------------------------
 # Maintenance
 # ---------------------------------------------------------------------------

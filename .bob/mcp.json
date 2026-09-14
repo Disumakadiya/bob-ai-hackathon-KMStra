@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "predictive-maintenance": {
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/src/api/mcp_server.py"
+      ],
+      "disabled": false
+    }
+  }
+}

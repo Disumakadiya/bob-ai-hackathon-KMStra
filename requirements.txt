@@ -44,3 +44,4 @@ fastapi==0.141.1       # used by: src/api/main.py (FastAPI, HTTPException,
 uvicorn==0.41.0        # used by: src/api/main.py (ASGI server)
 python-multipart==0.0.22  # required by FastAPI to parse multipart/form-data
                           # (file uploads via POST /api/assess)
+mcp
