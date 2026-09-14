@@ -59,7 +59,7 @@ function LandingPage() {
             <a href="#solutions" className="nav-link">Solutions</a>
             <a href="#impact" className="nav-link">Impact</a>
             <a href="#how-it-works" className="nav-link">How It Works</a>
-            <a href="#about" className="nav-link">About</a>
+            <Link to="/sensor-assessment" className="nav-link">Sensor Assessment</Link>
           </div>
           
           <div className="nav-actions">
@@ -100,9 +100,9 @@ function LandingPage() {
               <Link to="/mission-intelligence" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center' }}>
                 Launch Mission Copilot <ArrowRight size={18} />
               </Link>
-              <button className="btn btn-secondary">
-                Watch How It Works
-              </button>
+              <Link to="/sensor-assessment" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                Assess New Asset <ArrowRight size={18} />
+              </Link>
             </div>
           </div>
           

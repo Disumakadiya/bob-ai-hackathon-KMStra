@@ -47,7 +47,7 @@ from typing import Any
 
 import pandas as pd
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
 # Ensure project root is on sys.path when run as __main__
@@ -86,7 +86,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
@@ -329,6 +329,53 @@ def get_mission_readiness(mission_id: str) -> dict:
         **summary,
         "suitable_assets": suitable_list,
     }
+
+
+# ---------------------------------------------------------------------------
+# Sensor Assessment (unseen engine CSV)
+# ---------------------------------------------------------------------------
+
+@app.post("/api/assess", tags=["assess"], summary="Assess unseen engine sensor history")
+async def assess_engine(file: UploadFile = File(...)) -> dict | list:
+    """Accept an unseen engine sensor-history CSV and return combined model output.
+
+    The CSV must contain multiple cycles of sensor history using the exact
+    columns required by the pipeline:
+
+        unit, cycle, op1, op2, [op3,] s1..s21  (full raw, 26 cols)
+      OR
+        unit, cycle, op1, op2, s2–s4, s6–s9, s11–s15, s17, s20–s21  (cleaned, 19 cols)
+
+    At least 2 cycles are required for rolling/delta features.
+    RUL must NOT appear as an input column.
+
+    Returns the latest-cycle assessment per engine unit (dict for single
+    engine, list for multiple engines).
+    """
+    from src.api.assess import assess_sensor_data
+
+    if not file.filename or not file.filename.lower().endswith(".csv"):
+        raise HTTPException(
+            status_code=400,
+            detail="Uploaded file must be a CSV (filename must end with .csv).",
+        )
+
+    content = await file.read()
+    if not content:
+        raise HTTPException(status_code=400, detail="Uploaded file is empty.")
+
+    try:
+        result = assess_sensor_data(content)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    except Exception as exc:
+        log.exception("Unexpected error during sensor assessment")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal error during assessment: {type(exc).__name__}",
+        )
+
+    return result
 
 
 # ---------------------------------------------------------------------------

@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { 
+import {
   Database,
-  Plane, AlertTriangle, CheckCircle, Clock, Search, 
+  Plane, AlertTriangle, CheckCircle, Clock, Search,
   ArrowRight, ShieldCheck, Activity, Target, BrainCircuit,
-  TrendingUp, TrendingDown, Bell, Zap, Calendar, Wrench, Menu, X 
+  TrendingUp, TrendingDown, Bell, Zap, Calendar, Wrench, Menu, X, Cpu
 } from 'lucide-react';
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
@@ -142,11 +142,15 @@ function MissionIntelligence() {
             <Plane className="text-teal" size={28} />
             <span>Astra<span className="text-copper">Pulse</span></span>
           </Link>
-          <div className="nav-links">
+          <div className="nav-links" style={{ display: 'flex', gap: '2rem' }}>
             <span className="nav-link" style={{ fontWeight: 600 }}>Mission Intelligence</span>
+            <Link to="/sensor-assessment" className="nav-link">Sensor Assessment</Link>
           </div>
-          <div className="nav-actions">
-            <Link to="/" className="btn btn-secondary d-none-mobile">Back to Home</Link>
+          <div className="nav-actions" style={{ display: 'flex', gap: '0.75rem' }}>
+            <Link to="/sensor-assessment" className="btn btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+              <Cpu size={16} /> Assess New Asset
+            </Link>
+            <Link to="/" className="btn btn-secondary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.9rem' }}>Back to Home</Link>
           </div>
         </div>
       </nav>
@@ -427,8 +431,24 @@ function MissionIntelligence() {
           </div>
         </section>
 
+        {/* ASSESS NEW ASSET CTA */}
+        <section style={{ marginTop: '3rem', marginBottom: '0', padding: '2.5rem 2rem', background: 'linear-gradient(135deg, rgba(91,155,152,0.06) 0%, var(--bg-surface) 100%)', borderRadius: '1.5rem', border: '1px solid rgba(91,155,152,0.2)', display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <Cpu size={20} style={{ color: 'var(--accent-teal)' }} />
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>Assess a New Asset</h3>
+            </div>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', maxWidth: '480px', margin: 0 }}>
+              Upload unseen sensor history and run Health, Failure-Risk and RUL inference on an asset not in the fleet registry.
+            </p>
+          </div>
+          <Link to="/sensor-assessment" className="btn btn-primary" style={{ whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+            Assess New Asset <ArrowRight size={18} />
+          </Link>
+        </section>
+
         {/* COPILOT CTA */}
-        <section style={{ marginTop: '4rem', marginBottom: '2rem', textAlign: 'center', padding: '4rem 2rem', background: 'linear-gradient(135deg, var(--bg-main) 0%, rgba(91, 155, 152, 0.1) 100%)', borderRadius: '2rem', border: '1px solid rgba(91, 155, 152, 0.2)' }}>
+        <section style={{ marginTop: '2rem', marginBottom: '2rem', textAlign: 'center', padding: '4rem 2rem', background: 'linear-gradient(135deg, var(--bg-main) 0%, rgba(91, 155, 152, 0.1) 100%)', borderRadius: '2rem', border: '1px solid rgba(91, 155, 152, 0.2)' }}>
           <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--text-main)' }}>Need a deeper answer?</h2>
           <p style={{ fontSize: '1.1rem', color: 'var(--text-light)', maxWidth: '600px', margin: '0 auto 2rem auto' }}>
             Interact with our IBM Bob/MCP-powered Copilot to trace AI rationale to the raw sensor data and maintenance logs.
