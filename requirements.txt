@@ -5,7 +5,7 @@
 # Transitive dependencies (scipy, threadpoolctl, python-dateutil, etc.)
 # are resolved automatically by pip from the entries below.
 #
-# Verified against: Python 3.13
+# Verified against: Python 3.12
 # Packages confirmed by import-scanning all files under src/
 #
 # Usage:
@@ -35,3 +35,12 @@ xgboost==3.4.1         # used by: train.py, failure_prediction.py (XGBClassifier
 # -----------------------------------------------------------------------
 joblib==1.5.3          # used by: anomaly_detector (dump/load),
                        #          train.py, failure_prediction.py (save_model/load_model)
+
+# -----------------------------------------------------------------------
+# API server  (added for POST /api/assess and all REST endpoints)
+# -----------------------------------------------------------------------
+fastapi==0.141.1       # used by: src/api/main.py (FastAPI, HTTPException,
+                       #          UploadFile, File)
+uvicorn==0.41.0        # used by: src/api/main.py (ASGI server)
+python-multipart==0.0.22  # required by FastAPI to parse multipart/form-data
+                          # (file uploads via POST /api/assess)
