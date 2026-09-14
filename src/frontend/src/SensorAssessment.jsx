@@ -89,22 +89,82 @@ function generateSampleCSV() {
 // ---------------------------------------------------------------------------
 function deriveReadiness(result) {
   if (!result) return null;
-  const { health_score, failure_probability, predicted_rul_cycles } = result;
-  if (
-    health_score < 40 ||
-    failure_probability > 0.7 ||
-    (predicted_rul_cycles !== undefined && predicted_rul_cycles < 20)
-  ) {
-    return { label: 'NOT READY', color: '#e54f4f', bg: 'rgba(229,79,79,0.08)', border: '#e54f4f', icon: 'error' };
+  
+  if (result.readiness_status) {
+    const label = result.readiness_status === 'READY' ? 'MISSION READY' : 
+                  result.readiness_status === 'ADVISORY' ? 'AT RISK' : 'NOT READY';
+    const color = result.readiness_status === 'READY' ? '#5B9B98' : 
+                  result.readiness_status === 'ADVISORY' ? '#C9725D' : '#e54f4f';
+    const bg = result.readiness_status === 'READY' ? 'rgba(91,155,152,0.08)' : 
+               result.readiness_status === 'ADVISORY' ? 'rgba(201,114,93,0.08)' : 'rgba(229,79,79,0.08)';
+    const icon = result.readiness_status === 'READY' ? 'ok' : 
+                 result.readiness_status === 'ADVISORY' ? 'warn' : 'error';
+    return {
+      ...result,
+      label, color, bg, border: color, icon
+    };
   }
-  if (
-    health_score < 70 ||
-    failure_probability > 0.3 ||
-    (predicted_rul_cycles !== undefined && predicted_rul_cycles < 50)
-  ) {
-    return { label: 'AT RISK', color: '#C9725D', bg: 'rgba(201,114,93,0.08)', border: '#C9725D', icon: 'warn' };
+
+  // Fallback mirroring backend semantics exactly
+  const health_component = result.health_score / 100.0;
+  const failure_component = 1.0 - result.failure_probability;
+  const rul_val = Math.min(result.predicted_rul_cycles !== undefined ? result.predicted_rul_cycles : 100.0, 100.0);
+  const rul_component = rul_val / 100.0;
+
+  let readiness_score = 100.0 * (0.30 * health_component + 0.40 * failure_component + 0.30 * rul_component);
+  readiness_score = Math.max(0, Math.min(100, readiness_score));
+
+  let readiness_status = 'NOT_READY';
+  if (readiness_score >= 70.0) readiness_status = 'READY';
+  else if (readiness_score >= 40.0) readiness_status = 'ADVISORY';
+
+  const priority_score = 100.0 - readiness_score;
+  let maintenance_priority = 'LOW';
+  if (priority_score >= 70.0) maintenance_priority = 'IMMEDIATE';
+  else if (priority_score >= 50.0) maintenance_priority = 'HIGH';
+  else if (priority_score >= 30.0) maintenance_priority = 'MEDIUM';
+
+  let rul_status = 'ADVISORY';
+  if (result.predicted_rul_cycles !== undefined) {
+    if (result.predicted_rul_cycles < 30) rul_status = 'CRITICAL';
+    else if (result.predicted_rul_cycles >= 100) rul_status = 'HEALTHY';
   }
-  return { label: 'MISSION READY', color: '#5B9B98', bg: 'rgba(91,155,152,0.08)', border: '#5B9B98', icon: 'ok' };
+
+  let primary_reason = 'All systems nominal';
+  if (result.health_status === 'CRITICAL') primary_reason = 'Critical health anomaly detected';
+  else if (result.failure_status === 'HIGH') primary_reason = 'High failure probability';
+  else if (rul_status === 'CRITICAL') primary_reason = 'RUL in critical zone';
+  else if (result.health_status === 'WARNING') primary_reason = 'Health in warning zone';
+  else if (result.failure_status === 'MEDIUM') primary_reason = 'Moderate failure risk';
+  else if (rul_status === 'ADVISORY') primary_reason = 'RUL in advisory range';
+
+  let recommended_action = 'Review asset condition';
+  if (readiness_status === 'READY') recommended_action = 'Routine monitoring';
+  else if (readiness_status === 'ADVISORY') recommended_action = 'Schedule inspection and continue monitoring';
+  else if (readiness_status === 'NOT_READY') recommended_action = 'Immediate maintenance inspection required';
+
+  let label, color, bg, border, icon;
+  if (readiness_status === 'READY') {
+    label = 'MISSION READY';
+    color = '#5B9B98'; bg = 'rgba(91,155,152,0.08)'; border = '#5B9B98'; icon = 'ok';
+  } else if (readiness_status === 'ADVISORY') {
+    label = 'AT RISK';
+    color = '#C9725D'; bg = 'rgba(201,114,93,0.08)'; border = '#C9725D'; icon = 'warn';
+  } else {
+    label = 'NOT READY';
+    color = '#e54f4f'; bg = 'rgba(229,79,79,0.08)'; border = '#e54f4f'; icon = 'error';
+  }
+
+  return {
+    ...result,
+    readiness_score,
+    readiness_status,
+    primary_reason,
+    recommended_action,
+    maintenance_priority_score: priority_score,
+    maintenance_priority,
+    label, color, bg, border: color, icon
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -206,6 +266,39 @@ export default function SensorAssessment() {
   const [error, setError] = useState(null);
   const [results, setResults] = useState(null);
   const [allCycles, setAllCycles] = useState([]);
+  const [timeseries, setTimeseries] = useState(null);
+  const [timeseriesLoading, setTimeseriesLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchTimeseries() {
+      if (results && results[0] && results[0].unit) {
+        setTimeseriesLoading(true);
+        try {
+          const unitId = results[0].unit;
+          const resp = await fetch(`/api/assets/ENG-${String(unitId).padStart(3, '0')}/timeseries`);
+          if (resp.ok) {
+            const data = await resp.json();
+            // Process data for charts
+            const processed = data.map(d => ({
+              ...d,
+              predicted_rul: d.predicted_rul === -1 ? null : d.predicted_rul,
+              failure_probability: d.failure_probability === -1 ? null : (d.failure_probability * 100)
+            }));
+            setTimeseries(processed);
+          } else {
+            setTimeseries([]);
+          }
+        } catch (e) {
+          setTimeseries([]);
+        } finally {
+          setTimeseriesLoading(false);
+        }
+      } else {
+        setTimeseries(null);
+      }
+    }
+    fetchTimeseries();
+  }, [results]);
   const [showBobModal, setShowBobModal] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -798,7 +891,7 @@ export default function SensorAssessment() {
 
             {results && resultsArr.map((result) => {
               const rd = deriveReadiness(result);
-              const explanation = buildRiskExplanation(result);
+              const explanation = rd.primary_reason + ' - ' + rd.recommended_action;
               const cycleTrend = getCycleTrend(result.unit);
 
               return (
@@ -836,7 +929,7 @@ export default function SensorAssessment() {
                     </div>
                   </div>
 
-                  {/* ── 6 Metric Cards ── */}
+                  {/* ── Metric Cards ── */}
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem' }}>
                     <MetricCard
                       label="Health Score" icon={Activity}
@@ -846,13 +939,6 @@ export default function SensorAssessment() {
                       accent={result.health_score >= 70 ? '#5B9B98' : result.health_score >= 40 ? '#C9725D' : '#e54f4f'}
                     />
                     <MetricCard
-                      label="Health Status" icon={ShieldCheck}
-                      value={result.health_status}
-                      sub="IsolationForest output"
-                      color={result.health_status === 'NORMAL' ? '#5B9B98' : result.health_status === 'WARNING' ? '#C9725D' : '#e54f4f'}
-                      accent="#9994B6"
-                    />
-                    <MetricCard
                       label="Failure Probability" icon={AlertTriangle}
                       value={(result.failure_probability * 100).toFixed(2) + '%'}
                       sub={result.failure_status}
@@ -860,18 +946,25 @@ export default function SensorAssessment() {
                       accent={result.failure_probability < 0.3 ? '#5B9B98' : result.failure_probability < 0.7 ? '#C9725D' : '#e54f4f'}
                     />
                     <MetricCard
-                      label="Failure Status" icon={Target}
-                      value={result.failure_status}
-                      sub="XGBoost output"
-                      color={result.failure_status === 'LOW' ? '#5B9B98' : result.failure_status === 'MEDIUM' ? '#C9725D' : '#e54f4f'}
-                      accent="#C9725D"
-                    />
-                    <MetricCard
                       label="Predicted RUL" icon={TrendingUp}
                       value={result.predicted_rul_cycles + ' cycles'}
                       sub="RandomForest output"
                       color={result.predicted_rul_cycles > 100 ? '#5B9B98' : result.predicted_rul_cycles > 30 ? '#C9725D' : '#e54f4f'}
                       accent="#5B9B98"
+                    />
+                    <MetricCard
+                      label="Readiness Score" icon={Activity}
+                      value={rd.readiness_score ? rd.readiness_score.toFixed(2) : 'N/A'}
+                      sub="Composite readiness"
+                      color={rd.readiness_score >= 70 ? '#5B9B98' : rd.readiness_score >= 40 ? '#C9725D' : '#e54f4f'}
+                      accent={rd.readiness_score >= 70 ? '#5B9B98' : rd.readiness_score >= 40 ? '#C9725D' : '#e54f4f'}
+                    />
+                    <MetricCard
+                      label="Maintenance Priority" icon={AlertTriangle}
+                      value={rd.maintenance_priority || 'N/A'}
+                      sub="Priority classification"
+                      color={rd.maintenance_priority === 'LOW' ? '#5B9B98' : rd.maintenance_priority === 'MEDIUM' ? '#C9725D' : '#e54f4f'}
+                      accent={rd.maintenance_priority === 'LOW' ? '#5B9B98' : rd.maintenance_priority === 'MEDIUM' ? '#C9725D' : '#e54f4f'}
                     />
                     <MetricCard
                       label="Anomaly Score" icon={Zap}
@@ -899,7 +992,72 @@ export default function SensorAssessment() {
                     </p>
                   </section>
 
-                  {/* ── Cycle Trend Charts ── */}
+                  {/* ── Dynamic Model Trend Charts ── */}
+                  <section className="feature-card" style={{ padding: '1.75rem', marginBottom: '1.5rem' }}>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <TrendingUp size={18} className="text-copper" /> Dynamic Model Trends (Historical) — Unit {result.unit}
+                    </h3>
+                    
+                    {timeseriesLoading ? (
+                      <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                        <RefreshCw size={24} className="sa-spin" style={{ color: 'var(--accent-teal)', marginBottom: '0.5rem' }} />
+                        <div>Loading historical model data...</div>
+                      </div>
+                    ) : !timeseries || timeseries.length === 0 ? (
+                      <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                        No historical model data available.
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        <div>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Health Score</div>
+                          <div style={{ height: 180 }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                              <LineChart data={timeseries} margin={{ top: 4, right: 8, left: 0, bottom: 4 }}>
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
+                                <XAxis dataKey="cycle" stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
+                                <YAxis domain={[0, 100]} stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} width={40} />
+                                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', fontSize: '0.8rem' }} />
+                                <Line type="monotone" dataKey="health_score" stroke="var(--accent-teal)" strokeWidth={2} dot={false} connectNulls />
+                              </LineChart>
+                            </ResponsiveContainer>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Failure Probability (%)</div>
+                          <div style={{ height: 180 }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                              <LineChart data={timeseries} margin={{ top: 4, right: 8, left: 0, bottom: 4 }}>
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
+                                <XAxis dataKey="cycle" stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
+                                <YAxis domain={[0, 100]} stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} width={40} />
+                                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', fontSize: '0.8rem' }} />
+                                <Line type="monotone" dataKey="failure_probability" stroke="#C9725D" strokeWidth={2} dot={false} connectNulls />
+                              </LineChart>
+                            </ResponsiveContainer>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Predicted RUL (Cycles)</div>
+                          <div style={{ height: 180 }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                              <LineChart data={timeseries} margin={{ top: 4, right: 8, left: 0, bottom: 4 }}>
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
+                                <XAxis dataKey="cycle" stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
+                                <YAxis stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} width={40} />
+                                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', fontSize: '0.8rem' }} />
+                                <Line type="monotone" dataKey="predicted_rul" stroke="#9994B6" strokeWidth={2} dot={false} connectNulls />
+                              </LineChart>
+                            </ResponsiveContainer>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </section>
+
+                  {/* ── Cycle Trend Charts (Raw Sensor Data) ── */}
                   {cycleTrend.length >= 2 && (
                     <section className="feature-card" style={{ padding: '1.75rem' }}>
                       <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
