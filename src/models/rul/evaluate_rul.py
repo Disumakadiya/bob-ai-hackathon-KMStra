@@ -88,8 +88,8 @@ def evaluate() -> None:
     print()
     print("  RUL status thresholds:")
     print(f"    HEALTHY   : predicted_rul > {THRESHOLD_HEALTHY}")
-    print(f"    ADVISORY  : {THRESHOLD_CRITICAL} < predicted_rul ≤ {THRESHOLD_HEALTHY}")
-    print(f"    CRITICAL  : predicted_rul ≤ {THRESHOLD_CRITICAL}")
+    print(f"    ADVISORY  : {THRESHOLD_CRITICAL} < predicted_rul <= {THRESHOLD_HEALTHY}")
+    print(f"    CRITICAL  : predicted_rul <= {THRESHOLD_CRITICAL}")
     print()
     print("  Status distribution:")
     for status in ["HEALTHY", "ADVISORY", "CRITICAL"]:
