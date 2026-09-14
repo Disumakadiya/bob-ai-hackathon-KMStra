@@ -99,6 +99,8 @@ src/models/failure/*.csv
 src/models/rul/*.joblib
 src/models/rul/*.csv
 
+src/data/outputs/*.csv
+
 # ── Jupyter Notebooks ─────────────────────────────────────────────────────────
 # .ipynb_checkpoints/
 
