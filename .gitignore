@@ -95,6 +95,9 @@ src/models/health/*.csv
 # Trained failure model binary & score CSV (recreated by train.py)
 src/models/failure/*.joblib
 src/models/failure/*.csv
+# Trained RUL model binary & score CSV (recreated by train_rul.py)
+src/models/rul/*.joblib
+src/models/rul/*.csv
 
 # ── Jupyter Notebooks ─────────────────────────────────────────────────────────
 # .ipynb_checkpoints/
