@@ -1,4 +1,4 @@
-# =============================================================================
+﻿# =============================================================================
 # HACKATHON SUBMISSION — .gitignore
 # =============================================================================
 # IMPORTANT: Never commit secrets, credentials, or large binary files.
@@ -12,11 +12,8 @@
 *.p12
 secrets/
 
-models/
-
 # ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
-
 *.pyo
 .Python
 venv/
@@ -32,7 +29,6 @@ build/
 *.coverage
 htmlcov/
 
-
 # ── Node.js ───────────────────────────────────────────────────────────────────
 node_modules/
 npm-debug.log*
@@ -40,27 +36,24 @@ yarn-debug.log*
 yarn-error.log*
 .npm
 .yarn
-dist/
 .next/
 .nuxt/
 .output/
 .cache/
 
-# ── Java / Maven / Gradle ────────────────────────────────────────────────────
+# ── Java / Maven / Gradle ─────────────────────────────────────────────────────
 target/
 *.class
 *.jar
 *.war
 .gradle/
-build/
 
 # ── Go ────────────────────────────────────────────────────────────────────────
 vendor/
 *.exe
 
 # ── Rust ──────────────────────────────────────────────────────────────────────
-target/
-Cargo.lock  # remove this line if you want to commit lock file (recommended for apps)
+Cargo.lock
 
 # ── macOS ─────────────────────────────────────────────────────────────────────
 .DS_Store
@@ -96,25 +89,19 @@ src/data/ingestion/nasa/test_FD001.txt
 src/data/ingestion/nasa/RUL_FD001.txt
 # Generated FD001 preprocessed CSVs (recreated from raw + scripts)
 src/data/preprocessing/*.csv
-# Trained model binaries & generated health/anomaly score CSVs (recreated by training scripts)
+# Trained model binaries & generated score CSVs (recreated by training scripts)
 src/models/health/*.joblib
 src/models/health/*.csv
-
-# Trained failure model binary & integration test cache (Member 2 -- recreated by train.py)
+# Trained failure model binary & score CSV (recreated by train.py)
 src/models/failure/*.joblib
-src/models/failure/__pycache__/
-=======
+src/models/failure/*.csv
 
-
-# ── Jupyter Notebooks (optional: remove if you want to commit notebooks) ──────
+# ── Jupyter Notebooks ─────────────────────────────────────────────────────────
 # .ipynb_checkpoints/
 
 # ── Terraform ─────────────────────────────────────────────────────────────────
 .terraform/
-
 *.tfstate
-*.tfstate.backup
-=======
 *.tfstate.backup
 
 # ── Frontend (Vite/React) ─────────────────────────────────────────────────────
@@ -129,4 +116,3 @@ src/frontend/yarn-error.log*
 src/frontend/pnpm-debug.log*
 src/frontend/lerna-debug.log*
 src/frontend/node_modules
-
