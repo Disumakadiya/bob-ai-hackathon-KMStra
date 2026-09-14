@@ -5,22 +5,19 @@ import {
   ArrowRight, ShieldCheck, Activity, Target, BrainCircuit,
   TrendingUp, TrendingDown, Bell, Zap, Calendar, Wrench, Menu, X, Cpu
 } from 'lucide-react';
-import { 
+import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-// Import JSON data directly
-import actualData from './data/actualData.json';
+// Time-series data stays as a local import (per-cycle history, separate concern)
 import timeSeriesData from './data/timeSeriesData.json';
 
-console.log('MissionIntelligence loaded, assets count:', actualData.length);
-
 // Utility for formatting
-const formatNum = (num, decimals = 2) => num === -1 ? 'N/A' : Number(num).toFixed(decimals);
+const formatNum = (num, decimals = 2) => (num === -1 || num === '' || num == null) ? 'N/A' : Number(num).toFixed(decimals);
 const getStatusColor = (val, type) => {
-  if (val === -1) return 'var(--text-light)';
+  if (val === -1 || val == null) return 'var(--text-light)';
   if (type === 'health') return val > 80 ? 'var(--text-teal)' : val > 50 ? 'var(--accent-copper)' : 'var(--text-error)';
   if (type === 'risk') return val < 0.2 ? 'var(--text-teal)' : val < 0.6 ? 'var(--accent-copper)' : 'var(--text-error)';
   return 'var(--text-main)';
@@ -58,32 +55,58 @@ function MissionIntelligence() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // --- API state ---
+  const [fleetData, setFleetData] = useState([]);
+  const [apiLoading, setApiLoading] = useState(true);
+  const [apiError, setApiError] = useState(null);
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const totalAssets = actualData.length;
-  // Categorize based on health and failure_probability
-  const readyAssets = actualData.filter(d => d.health_score >= 70 && (d.failure_probability < 0.3 || d.failure_probability === -1));
-  const maintenanceAssets = actualData.filter(d => d.health_score < 40 || d.failure_probability > 0.7);
-  const atRiskAssets = actualData.filter(d => !readyAssets.includes(d) && !maintenanceAssets.includes(d));
-
-  const filteredAssets = useMemo(() => {
-    return actualData.filter(a => a.asset_id.toLowerCase().includes(searchTerm.toLowerCase()));
-  }, [searchTerm]);
-
-  // Set default selection
+  // Fetch real fleet readiness from backend on mount
   useEffect(() => {
-    if (actualData.length > 0 && !selectedAssetId) {
-      // Prioritize selecting an at-risk or maintenance asset for demo
-      const demoTarget = maintenanceAssets[0] || atRiskAssets[0] || actualData[0];
+    setApiLoading(true);
+    setApiError(null);
+    fetch('/api/readiness')
+      .then(res => {
+        if (!res.ok) throw new Error(`API error ${res.status}: ${res.statusText}`);
+        return res.json();
+      })
+      .then(data => {
+        setFleetData(data);
+        setApiLoading(false);
+      })
+      .catch(err => {
+        setApiError(err.message);
+        setApiLoading(false);
+      });
+  }, []);
+
+  // Set default selection once data arrives
+  useEffect(() => {
+    if (fleetData.length > 0 && !selectedAssetId) {
+      const demoTarget =
+        fleetData.find(d => d.readiness_status === 'NOT_READY') ||
+        fleetData.find(d => d.readiness_status === 'ADVISORY') ||
+        fleetData[0];
       setSelectedAssetId(demoTarget.asset_id);
     }
-  }, [selectedAssetId, maintenanceAssets, atRiskAssets]);
+  }, [fleetData, selectedAssetId]);
 
-  const selectedAsset = useMemo(() => actualData.find(a => a.asset_id === selectedAssetId), [selectedAssetId]);
+  // KPIs — derived from readiness_status returned by the backend engine
+  const totalAssets = fleetData.length;
+  const readyAssets    = fleetData.filter(d => d.readiness_status === 'READY');
+  const atRiskAssets   = fleetData.filter(d => d.readiness_status === 'ADVISORY');
+  const maintenanceAssets = fleetData.filter(d => d.readiness_status === 'NOT_READY');
+
+  const filteredAssets = useMemo(() => {
+    return fleetData.filter(a => String(a.asset_id).toLowerCase().includes(searchTerm.toLowerCase()));
+  }, [searchTerm, fleetData]);
+
+  const selectedAsset = useMemo(() => fleetData.find(a => a.asset_id === selectedAssetId), [selectedAssetId, fleetData]);
   
   // Prepare Time Series Data
   const selectedTimeSeries = useMemo(() => {
@@ -124,14 +147,40 @@ function MissionIntelligence() {
     return `Risk is elevated due to ${reasons.join(" and ")} across monitored subsystems.`;
   };
 
-  // Maintenance Priority ranking
+  // Maintenance Priority ranking — use maintenance_priority_score from the backend
   const priorityList = useMemo(() => {
-    return [...actualData].sort((a, b) => {
-      let scoreA = (a.failure_probability !== -1 ? a.failure_probability * 50 : 0) - (a.health_score !== -1 ? a.health_score : 100);
-      let scoreB = (b.failure_probability !== -1 ? b.failure_probability * 50 : 0) - (b.health_score !== -1 ? b.health_score : 100);
-      return scoreB - scoreA; // descending risk
-    }).slice(0, 5); // top 5
-  }, []);
+    return [...fleetData]
+      .sort((a, b) => (b.maintenance_priority_score ?? 0) - (a.maintenance_priority_score ?? 0))
+      .slice(0, 5);
+  }, [fleetData]);
+
+  // Loading state
+  if (apiLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '1rem', background: 'var(--bg-main)' }}>
+        <Activity size={40} style={{ color: 'var(--accent-teal)', animation: 'spin 1s linear infinite' }} />
+        <p style={{ color: 'var(--text-light)', fontSize: '1.1rem' }}>Loading fleet readiness data…</p>
+        <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+      </div>
+    );
+  }
+
+  // Error state
+  if (apiError) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '1rem', background: 'var(--bg-main)', padding: '2rem' }}>
+        <AlertTriangle size={40} style={{ color: 'var(--text-error)' }} />
+        <p style={{ color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 600 }}>Failed to load readiness data</p>
+        <p style={{ color: 'var(--text-light)', fontSize: '0.9rem', maxWidth: '480px', textAlign: 'center' }}>
+          {apiError}
+        </p>
+        <p style={{ color: 'var(--text-light)', fontSize: '0.85rem' }}>
+          Make sure the backend is running: <code>uvicorn src.api.main:app --port 8000</code>
+        </p>
+        <button className="btn btn-primary" onClick={() => window.location.reload()}>Retry</button>
+      </div>
+    );
+  }
 
   return (
       <div className="app bg-surface" style={{ minHeight: '100vh', paddingBottom: '4rem' }}>

@@ -332,6 +332,46 @@ def get_mission_readiness(mission_id: str) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Readiness fleet endpoint (consumed by Mission Intelligence frontend)
+# ---------------------------------------------------------------------------
+
+@app.get("/api/readiness", tags=["readiness"], summary="Full fleet readiness for the dashboard")
+def get_fleet_readiness() -> list[dict]:
+    """Return one record per asset combining all readiness fields plus next-mission context.
+
+    asset_id is returned in ENG-XXX format so the frontend can display it directly.
+    readiness_status: READY | ADVISORY | NOT_READY (from the readiness engine).
+    """
+    df = _load_readiness().copy()
+    missions_df = _load_missions()
+
+    # Format asset_id as ENG-XXX
+    df["asset_id"] = df["asset_id"].apply(lambda x: f"ENG-{int(x):03d}")
+
+    # Join next mission per asset (earliest mission_date)
+    if not missions_df.empty:
+        missions_df = missions_df.copy()
+        missions_df["mission_date_dt"] = pd.to_datetime(
+            missions_df["mission_date"], errors="coerce"
+        )
+        next_missions = (
+            missions_df.sort_values("mission_date_dt")
+            .groupby("asset_id")
+            .first()
+            .reset_index()[
+                ["asset_id", "mission_type", "mission_criticality", "mission_date"]
+            ]
+        )
+        next_missions["mission_date"] = pd.to_datetime(
+            next_missions["mission_date"], errors="coerce"
+        ).dt.strftime("%Y-%m-%d")
+        df = df.merge(next_missions, on="asset_id", how="left")
+
+    df = df.fillna("")
+    return df.to_dict(orient="records")
+
+
+# ---------------------------------------------------------------------------
 # Sensor Assessment (unseen engine CSV)
 # ---------------------------------------------------------------------------
 
