@@ -82,8 +82,16 @@ def normalize_anomaly(
         max_anomaly = ANOMALY_SCORE_MAX
     if max_anomaly == min_anomaly:
         return pd.Series([HEALTH_SCORE_MAX] * len(anomaly_series), index=anomaly_series.index)
-    score = (max_anomaly - anomaly_series) / (max_anomaly - min_anomaly) * HEALTH_SCORE_MAX
-    return score.clip(lower=HEALTH_SCORE_MIN, upper=HEALTH_SCORE_MAX)
+
+    # Use a logistic mapping to prevent valid anomaly values from collapsing to exactly 0.
+    # The mapping is anchored to preserve the original 70 and 40 status cut-offs
+    # (which occur at 30% and 70% of the linear range from min_anomaly to max_anomaly).
+    k = np.log(3.5) / (0.3 * (max_anomaly - min_anomaly))
+    A0 = (max_anomaly - 0.4 * (max_anomaly - min_anomaly)) - np.log(1.5) / k
+
+    exponent = np.clip(k * (anomaly_series - A0), a_min=-700, a_max=700)
+    score = HEALTH_SCORE_MAX / (1.0 + np.exp(exponent))
+    return score
 
 
 def assign_status(health_score_series: pd.Series) -> pd.Series:
