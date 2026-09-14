@@ -103,6 +103,7 @@ src/models/health/*.csv
 # Trained failure model binary & integration test cache (Member 2 -- recreated by train.py)
 src/models/failure/*.joblib
 src/models/failure/__pycache__/
+src/models/failure/*.csv
 =======
 
 
