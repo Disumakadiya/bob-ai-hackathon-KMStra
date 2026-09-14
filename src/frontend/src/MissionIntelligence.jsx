@@ -11,8 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import './index.css';
 
-// Time-series data stays as a local import (per-cycle history, separate concern)
-import timeSeriesData from './data/timeSeriesData.json';
+// Time-series data is now fetched from the backend.
 
 // Utility for formatting
 const formatNum = (num, decimals = 2) => (num === -1 || num === '' || num == null) ? 'N/A' : Number(num).toFixed(decimals);
@@ -59,6 +58,31 @@ function MissionIntelligence() {
   const [fleetData, setFleetData] = useState([]);
   const [apiLoading, setApiLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
+
+  const [timeSeriesData, setTimeSeriesData] = useState({});
+  const [tsLoading, setTsLoading] = useState(false);
+  const [tsError, setTsError] = useState(null);
+
+  useEffect(() => {
+    if (!selectedAssetId) return;
+    if (timeSeriesData[selectedAssetId]) return; // Already cached
+
+    setTsLoading(true);
+    setTsError(null);
+    fetch(`/api/assets/${selectedAssetId}/timeseries`)
+      .then(res => {
+        if (!res.ok) throw new Error(`API error ${res.status}: ${res.statusText}`);
+        return res.json();
+      })
+      .then(data => {
+        setTimeSeriesData(prev => ({ ...prev, [selectedAssetId]: data }));
+        setTsLoading(false);
+      })
+      .catch(err => {
+        setTsError(err.message);
+        setTsLoading(false);
+      });
+  }, [selectedAssetId, timeSeriesData]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -116,7 +140,7 @@ function MissionIntelligence() {
       health: d.health_score !== -1 ? Number(formatNum(d.health_score)) : null,
       risk: d.failure_probability !== -1 ? Number(formatNum(d.failure_probability * 100)) : null
     })).slice(-50); // Show last 50 cycles
-  }, [selectedAssetId]);
+  }, [selectedAssetId, timeSeriesData]);
 
   // Prepare Condition Change (Current vs Previous)
   const conditionChange = useMemo(() => {
@@ -131,7 +155,7 @@ function MissionIntelligence() {
       riskChange: current.failure_probability - prev.failure_probability,
       rulChange: (current.predicted_rul === -1 || prev.predicted_rul === -1) ? 0 : current.predicted_rul - prev.predicted_rul
     };
-  }, [selectedAssetId]);
+  }, [selectedAssetId, timeSeriesData]);
 
   const generateRiskExplanation = (asset) => {
     if (!asset) return "";
@@ -334,7 +358,15 @@ function MissionIntelligence() {
               <h2 style={{ fontSize: '1.25rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <TrendingUp size={20} className="text-copper" /> Health & Risk Trend ({selectedAssetId || 'None'})
               </h2>
-              {selectedTimeSeries.length > 0 ? (
+              {tsLoading ? (
+                <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ color: 'var(--text-light)' }}>Loading history...</div>
+                </div>
+              ) : tsError ? (
+                <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ color: 'var(--text-error)' }}>Failed to load history: {tsError}</div>
+                </div>
+              ) : selectedTimeSeries.length > 0 ? (
                 <div style={{ height: '300px', width: '100%' }}>
                   <ResponsiveContainer>
                     <LineChart data={selectedTimeSeries}>

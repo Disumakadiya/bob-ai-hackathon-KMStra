@@ -206,6 +206,7 @@ export default function SensorAssessment() {
   const [error, setError] = useState(null);
   const [results, setResults] = useState(null);
   const [allCycles, setAllCycles] = useState([]);
+  const [showBobModal, setShowBobModal] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -404,13 +405,7 @@ export default function SensorAssessment() {
   };
 
   const openBob = () => {
-    const ctx = buildBobContext(results, allCycles);
-    // Open bob with pre-filled context (window.postMessage or new window with IBM Bob)
-    const win = window.open('about:blank', '_blank');
-    if (win) {
-      win.document.write(`<pre style="font-family:sans-serif;padding:2rem;max-width:800px;margin:auto;white-space:pre-wrap;">${ctx}</pre><p style="text-align:center;color:#888;">Copy the text above and paste into your Mission Copilot / IBM Bob chat.</p>`);
-      win.document.title = 'Mission Copilot Context';
-    }
+    setShowBobModal(true);
   };
 
   // Build per-unit trend data from allCycles parsed rows
@@ -1007,6 +1002,77 @@ export default function SensorAssessment() {
           </div>
         </div>
       </div>
+      {/* ── Bob Modal ── */}
+      {showBobModal && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.6)', zIndex: 9999,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: '2rem'
+        }}>
+          <div style={{
+            background: 'var(--bg-color)', borderRadius: '1rem',
+            padding: '2rem', maxWidth: '800px', width: '100%',
+            maxHeight: '90vh', overflowY: 'auto',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+            position: 'relative'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <BrainCircuit className="text-teal" size={24} /> Ask Mission Copilot (IBM Bob)
+              </h2>
+              <button onClick={() => setShowBobModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div style={{ marginBottom: '1.5rem', fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+              <p style={{ marginBottom: '0.5rem' }}>
+                The AI conversation occurs in your secure IBM Bob environment. 
+                Please copy the exact context and question below, then paste it into your IBM Bob chat to begin the analysis.
+              </p>
+              <p>
+                <strong>Note:</strong> AstraPulse does not embed Bob directly to ensure your AI reasoning remains secure within the designated Copilot environment.
+              </p>
+            </div>
+
+            <div style={{ position: 'relative', marginBottom: '1.5rem' }}>
+              <pre style={{
+                background: 'var(--bg-surface)', padding: '1.5rem',
+                borderRadius: '0.5rem', border: '1px solid var(--border-light)',
+                whiteSpace: 'pre-wrap', fontFamily: 'monospace', fontSize: '0.85rem',
+                lineHeight: 1.5, color: 'var(--text-main)', margin: 0
+              }}>
+                {buildBobContext(results, allCycles)}
+              </pre>
+              <button
+                onClick={(e) => {
+                  navigator.clipboard.writeText(buildBobContext(results, allCycles));
+                  const btn = e.currentTarget;
+                  const oldText = btn.innerText;
+                  btn.innerText = 'Copied!';
+                  setTimeout(() => { btn.innerText = oldText; }, 2000);
+                }}
+                style={{
+                  position: 'absolute', top: '0.5rem', right: '0.5rem',
+                  padding: '0.4rem 0.8rem', fontSize: '0.75rem', fontWeight: 600,
+                  background: 'var(--accent-teal)', color: 'white',
+                  border: 'none', borderRadius: '0.25rem', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: '0.4rem'
+                }}
+              >
+                Copy Context
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <button className="btn btn-secondary" onClick={() => setShowBobModal(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Footer ── */}
       <footer className="footer" style={{ marginTop: '4rem' }}>
