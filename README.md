@@ -1,6 +1,6 @@
 # Mission Readiness & Predictive Maintenance Copilot
 
-> Documentation-stage Bobathon submission. The repository currently contains the project concept and submission documentation; implementation artifacts are not included yet.
+> Track D1
 
 ---
 
@@ -9,7 +9,7 @@
 | Field | Value |
 |---|---|
 | **Team Name** | Bob Copilot |
-| **Track** | AI |
+| **Track** | Defense & Aerospace |
 | **Team Lead** | Disu Makadiya — disu.makadiya@gmail.com |
 | **Members** | Vaibhavi Kariya, Pushti Kansara, Rutvi Shah |
 
