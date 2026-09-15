@@ -1,65 +1,39 @@
 # Source Code
 
-The source-code directory is reserved for the future implementation. It currently
-contains no application, model, notebook, test, or dependency files.
+The `src/` directory contains the full AstraPulse predictive maintenance copilot implementation, organized into functional modules:
 
-## 📊 Project: Bob Copilot - Defense & Aerospace
+- **`api/`** — FastAPI application with 12 REST endpoints serving asset health, failure risk, RUL models, readiness engine, maintenance priorities, mission readiness, and CSV assessment
+  - `main.py` — FastAPI app factory with all endpoints
+  - `assess.py` — POST `/api/assess` pipeline
+  - `mcp_server.py` — FastMCP server — 5 tools for IBM Bob
+- **`data/`** — Data pipeline
+  - `ingestion/` — NASA C-MAPSS parsing, synthetic CSVs
+  - `preprocessing/` — clean(), feature_engineering(), validation
+  - `schemas/` — nasa_schema.py (single source of truth)
+- **`models/`** — Trained model artefacts
+  - `health/` — `isolation_forest_model.joblib`
+  - `failure/` — `xgboost_failure_model.joblib`
+  - `rul/` — `rul_model.joblib`
+- **`integration/`** — Orchestration
+  - `readiness_engine.py` — ReadinessEngine + MissionReadiness
+  - `build_readiness.py` — Offline pipeline orchestrator
+- **`frontend/`** — React 19 + Vite (LandingPage, MissionIntelligence, SensorAssessment)
 
-| Field                 | Value                                                                                                                                                      |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Project Title**     | Mission Readiness & Predictive Maintenance Copilot                                                                                                         |
-| **Track**             | Defense & Aerospace - Mission Readiness & Predictive Maintenance                                                                                           |
-| **Team Lead**         | Disu Makadiya                                                                                                                                              |
-| **Team Members**      | Vaibhavi Karia, Pushti Kansara, Rutvi Shah                                                                                                                 |
-| **Problem**           | Teams need to connect condition signals, maintenance history, mission timing, and criticality when assessing readiness.                                    |
-| **Proposed solution** | Use NASA C-MAPSS plus clearly identified synthetic operational context with planned anomaly, failure-risk, RUL, explainability, and prioritization layers. |
+## MCP Tool Mapping (`.bob/mcp.json`)
 
-## Structure Guidelines
+| MCP Tool | API Endpoint |
+|---|---|
+| `get_fleet_readiness()` | `GET /api/readiness` |
+| `get_asset_status(asset_id)` | `GET /assets/{id}` |
+| `get_asset_timeseries(asset_id)` | `GET /api/assets/{id}/timeseries` |
+| `get_maintenance_priorities()` | `GET /maintenance/priorities` |
+| `get_mission_readiness(mission_id)` | `GET /missions/{id}/readiness` |
 
-When implementation begins, organize the code around the data and model
-ownership boundaries below. These are target conventions, not current files:
+## Guidelines
 
-### Web Application
-
-```
-src/
-  backend/        ← API server code
-  frontend/       ← UI code
-  shared/         ← Shared utilities/types
-```
-
-### Data / AI Project
-
-```
-src/
-  data/           ← Data ingestion / preprocessing
-  models/         ← ML model code
-  api/            ← Serving layer
-  notebooks/      ← Jupyter notebooks (exploration)
-```
-
-### CLI / Script-based Tool
-
-```
-src/
-  cli/            ← CLI entry points
-  lib/            ← Core logic
-  utils/          ← Helpers
-```
-
-## Intended Important Files to Include
-
-- `requirements.txt` — planned Python dependency manifest
-- `.env.example` — template for environment variables (NEVER commit `.env`)
-- Any database migration files
-- Configuration files
-
-## What NOT to Include in src/
-
-- `.env` files with real secrets
-- Large binary files (use Git LFS or link externally)
-- `node_modules/` or `venv/` (these are in `.gitignore`)
-- Build artifacts (`dist/`, `build/`, `__pycache__/`)
-
-No implementation code or generated model results have been added as part of
-this documentation task.
+- Keep model‑config thresholds imported from each model's own `config.py` rather than duplicated
+- When adding new API routes, edit `src/api/main.py` and update `.bob/mcp.json`
+- Keep `requirements.txt` and `requirements-dev.txt` in sync
+- Do not commit `.env` files with real secrets
+- Do not commit `node_modules/` or `venv/`
+- Do not commit build artifacts (`dist/`, `build/`, `__pycache__/`)
