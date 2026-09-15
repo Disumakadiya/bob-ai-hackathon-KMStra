@@ -17,35 +17,60 @@ submission:
   problem_statement: >
     Maintenance and operations teams need to determine whether mission-critical
     aircraft, vehicles, and equipment can meet an upcoming mission window.
-    Sensor/HUMS data and maintenance history may contain early degradation
-    signals, but those signals are difficult to connect to component risk,
-    remaining useful life, mission timing, and maintenance priority.
+    Sensor/HUMS data and maintenance history contain early degradation signals,
+    but those signals are difficult to connect to component risk, remaining
+    useful life, mission timing, and maintenance priority.
   solution_summary: >
-    The proposed copilot combines NASA C-MAPSS degradation and RUL data with
-    clearly identified synthetic operational context. It is designed to use
-    anomaly detection, component failure prediction, RUL prediction, SHAP
-    explanations, and mission-aware maintenance prioritization; implementation
-    and validated results are not yet present in this repository.
+    AstraPulse is a fully implemented Mission Readiness and Predictive
+    Maintenance Copilot. It trains three ML models on the NASA C-MAPSS FD001
+    turbofan dataset: an IsolationForest for asset health and anomaly scoring,
+    an XGBoost classifier for component failure risk, and a Random Forest
+    regressor for remaining useful life (RUL). A weighted readiness engine
+    combines the three model outputs into a per-asset readiness score, status
+    (READY / ADVISORY / NOT_READY), and maintenance priority. A FastAPI backend
+    exposes 10 REST endpoints and a POST /api/assess endpoint that runs all
+    three models on unseen sensor CSV uploads in real time. A React 19 frontend
+    provides a fleet Mission Intelligence dashboard and a Sensor Assessment
+    page. IBM Bob integrates via a registered MCP server with five tools
+    (get_fleet_readiness, get_asset_status, get_asset_timeseries,
+    get_maintenance_priorities, get_mission_readiness) so operators can query
+    fleet health and mission suitability in natural language.
   key_features:
-    - "Proposed asset health and anomaly assessment using Isolation Forest"
-    - "Proposed component failure risk prediction using an XGBoost classifier"
-    - "Proposed remaining useful life prediction using an XGBoost regressor"
-    - "Proposed SHAP explanations for risk and RUL drivers"
-    - "Proposed mission-aware maintenance prioritization"
+    - "Asset health and anomaly assessment using a trained IsolationForest (isolation_forest_model.joblib)"
+    - "Component failure risk prediction using a trained XGBoost classifier (xgboost_failure_model.joblib)"
+    - "Remaining useful life prediction using a trained Random Forest regressor (rul_model.joblib)"
+    - "Weighted readiness engine combining health (0.30), failure safety (0.40), and RUL (0.30) into a readiness score"
+    - "Real-time inference on unseen sensor CSV files via POST /api/assess (full preprocessing + all 3 models)"
+    - "Fleet Mission Intelligence dashboard with per-asset time-series charts (React 19 + Recharts)"
+    - "Bob Copilot integration via FastMCP with 5 registered tools in .bob/mcp.json"
+    - "Mission readiness evaluation: ENG-XXX → numeric ID mapping, assigned-asset evaluation, lowest-risk READY asset recommendation"
   tech_stack:
-    languages: ["Markdown", "YAML"]
-    frameworks: []
+    languages: ["Python", "JavaScript", "Markdown", "YAML"]
+    frameworks: ["FastAPI", "React", "Vite"]
     ibm_technologies: ["IBM Bob"]
     databases: []
-    other: ["GitHub Actions"]
+    other: ["scikit-learn", "XGBoost", "Pandas", "NumPy", "joblib", "Uvicorn", "Recharts", "React Router", "MCP (FastMCP)", "GitHub Actions"]
   what_we_are_most_proud_of: >
-    The documented separation between real NASA C-MAPSS degradation/RUL data,
-    synthetic operational context, and proposed mission-readiness logic, with
-    explicit boundaries around what is not yet implemented or validated.
+    A complete end-to-end working system built on top of a rigorous ML pipeline.
+    The three trained models (IsolationForest, XGBoost, Random Forest) are each
+    trained with strict no-leakage guarantees: chronological per-engine splits,
+    a single nasa_schema.py as the canonical source of truth for all column
+    names and feature policy, and capped RUL targets. The readiness engine
+    derives its thresholds directly from the models' own config modules rather
+    than duplicating them. IBM Bob is a genuine load-bearing component: the MCP
+    server is registered in .bob/mcp.json and the SensorAssessment UI builds a
+    structured context prompt from live model outputs and hands it directly to
+    Bob — making the human-to-AI handoff an intentional UX step.
   known_limitations: >
-    This is currently a documentation-stage submission. It has no source
-    implementation, trained models, metrics, tests, application, demo, or
-    deployment. Readiness thresholds and maintenance rankings are conceptual.
+    All degradation data is from NASA C-MAPSS FD001 (single operating condition,
+    single fault mode, simulated turbofan engines) — not real operational
+    aircraft. The three synthetic CSVs (assets, missions, maintenance) provide
+    operational context but are not sourced from real mission records. The
+    mission suitability decision uses only readiness_status (READY = suitable)
+    because missions.csv does not carry quantitative mission requirements such
+    as minimum RUL per mission type. SHAP explanations are not yet implemented.
+    The CORS policy is wide open (allow_origins=["*"]) and all endpoints are
+    unauthenticated — suitable for local demo only.
 
 artifacts:
   source_code: "src/"

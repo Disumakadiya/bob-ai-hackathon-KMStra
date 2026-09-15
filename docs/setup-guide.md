@@ -4,50 +4,133 @@
 
 ## Prerequisites
 
-The current repository is a documentation-stage submission. It does not contain
-an application, model pipeline, dependency manifest, test suite, or runnable
-entry point. Therefore there is no honest install or run command yet.
-
-For reviewing the documentation, ensure you have the following installed:
-
-- [ ] Git
-- [ ] A Markdown viewer or GitHub account for reading the documents
-- [ ] A YAML parser if validating `submission.yaml` locally
+| Requirement | Version | Notes |
+|---|---|---|
+| Python | 3.12+ | Tested on 3.12; 3.11 should also work |
+| Node.js | 18+ | Required for the React frontend only |
+| npm | 9+ | Comes with Node.js |
+| Git | any | To clone the repository |
 
 ## Environment Variables
 
-No environment variables are required to read the current documentation. The
-existing `src/.env.example` is a generic template and does not represent a
-running application configuration; do not add secrets to it.
+Copy `src/.env.example` to `src/.env` and fill in values only if you need them.
+The application runs fully without any environment variables for local demo purposes.
 
-| Variable | Description                                                      | Required |
-| -------- | ---------------------------------------------------------------- | -------- |
-| None     | No implemented runtime currently consumes environment variables. | No       |
+| Variable | Description | Required |
+|---|---|---|
+| `APP_PORT` | API server port (default: 8000) | No |
+| `APP_ENV` | `development` or `production` | No |
+| `WATSONX_API_KEY` | IBM watsonx.ai key (not used by current code) | No |
+| `DATABASE_URL` | PostgreSQL URL (no database is used; flat CSV only) | No |
+
+> The application uses **no database**. All persistent data is flat CSV files in `src/data/`.
 
 ## Installation
 
-No dependency manifest or installation command exists yet.
+### Python dependencies
+
+```bash
+# From the repository root
+python -m pip install -r requirements.txt
+```
+
+This installs: `numpy`, `pandas`, `scikit-learn`, `xgboost`, `joblib`, `fastapi`, `uvicorn`, `python-multipart`, `mcp`.
+
+### Frontend dependencies
+
+```bash
+cd src/frontend
+npm install
+```
 
 ## Running the Application
 
-There is no application to start and no local URL to open.
+### Step 1 — Start the FastAPI backend
+
+```bash
+# From the repository root
+uvicorn src.api.main:app --reload --port 8000
+```
+
+The API starts at **http://localhost:8000**.
+Interactive docs are available at **http://localhost:8000/docs**.
+
+The API reads from `src/data/outputs/asset_readiness.csv` (already committed).
+If that file is missing, run `python -m src.integration.build_readiness` first (see below).
+
+### Step 2 — Start the React frontend
+
+In a **separate terminal**:
+
+```bash
+cd src/frontend
+npm run dev
+```
+
+The frontend starts at **http://localhost:5173** and proxies `/api/*` to the backend on port 8000.
+
+### Step 3 — IBM Bob MCP server
+
+The MCP server is declared in [`.bob/mcp.json`](../.bob/mcp.json) and starts automatically when IBM Bob opens this workspace. To verify or run it manually:
+
+```bash
+python src/api/mcp_server.py
+```
+
+## Rebuilding Model Outputs (Optional)
+
+The trained model artefacts (`.joblib` files) and `asset_readiness.csv` are already committed to the repository. To reproduce them from scratch:
+
+```bash
+# 1. Preprocess NASA C-MAPSS FD001 raw text files
+python -m src.data.preprocessing.preprocess_nasa
+
+# 2. Train the health / anomaly model (IsolationForest)
+python -m src.models.health.train_anomaly
+
+# 3. Train the failure risk model (XGBoost)
+python -m src.models.failure.train
+
+# 4. Train the RUL model (RandomForestRegressor)
+python -m src.models.rul.train_rul
+
+# 5. Rebuild the integration CSV (asset_readiness.csv)
+python -m src.integration.build_readiness
+```
 
 ## Running Tests
 
-No project test command is available yet.
+```bash
+# API endpoint tests (requires running backend on port 8000)
+python test_endpoints.py
 
-## Quick Demo (Optional)
+# Sensor assessment pipeline test
+python test_assess.py
 
-No demo script or sample data is included yet. The planned first development
-slice is NASA C-MAPSS FD001 preprocessing and RUL modeling, followed by the
-synthetic operational context and readiness layer.
+# Health model unit tests
+python -m pytest src/models/health/test_health_scoring.py
 
-Not applicable at the current documentation stage.
+# Failure model integration test
+python -m pytest src/models/failure/_integration_test.py
+
+# Integration layer test
+python -m pytest src/integration/test_readiness.py
+```
+
+## Quick Demo
+
+Once the backend and frontend are running:
+
+1. Open **http://localhost:5173/mission-intelligence** — fleet dashboard showing all 100 assets with readiness status, health scores, failure probability, and RUL.
+2. Open **http://localhost:5173/sensor-assessment** — upload `unseen_asset_test_20_cycles.csv` from the repository root to run real-time inference on an unseen engine.
+3. Ask IBM Bob (via the MCP integration): *"Which assets need immediate maintenance?"* or *"Can ENG-047 fly mission MIS-053?"*
 
 ## Troubleshooting
 
-| Issue                      | Solution                                                             |
-| -------------------------- | -------------------------------------------------------------------- |
-| A run command is expected  | No application implementation or dependency manifest exists yet.     |
-| A model result is expected | No trained model, dataset download, or metric artifact is committed. |
-| A demo link is expected    | No demo video or deployed application URL has been provided.         |
+| Issue | Solution |
+|---|---|
+| `503 asset_readiness.csv not found` | Run `python -m src.integration.build_readiness` |
+| `FileNotFoundError: isolation_forest_model.joblib` | Run `python -m src.models.health.train_anomaly` |
+| Frontend shows `API error 503` | Ensure the FastAPI backend is running on port 8000 |
+| `POST /api/assess` returns 422 | CSV must have ≥ 2 cycles and no `rul` column; see `src/api/assess.py` for schema |
+| MCP tools not visible in Bob | Check `.bob/mcp.json` exists and `python src/api/mcp_server.py` runs without error |
