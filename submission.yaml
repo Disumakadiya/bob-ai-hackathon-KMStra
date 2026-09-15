@@ -1,16 +1,16 @@
 team:
-  name: "Bob Copilot"
+  name: "KMStra"
   track: "AI"
   lead:
     name: "Disu Makadiya"
-    email: "disu.makadiya@ibm.com"
+    email: "disumakadiya@gmail.com"
   members:
     - name: "Vaibhavi Kariya"
       email: "kariavaibhavi@gmail.com"
     - name: "Pushti Kansara"
-      email: ""
+      email: "pushti612@gmail.com"
     - name: "Rutvi Shah"
-      email: ""
+      email: "shahrutvi020@gmail.com"
 
 submission:
   title: "Mission Readiness & Predictive Maintenance Copilot"
