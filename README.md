@@ -114,6 +114,48 @@ requirements.txt
 
 ---
 
+## 🔌 API Endpoints
+
+All endpoints are listed task-wise below. The full FastAPI app with automatic Swagger UI is available at `http://localhost:8000/docs`.
+
+### 🔍 Asset Health & Status
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/` | API health check |
+| `GET` | `/assets` | List all assets with readiness summary |
+| `GET` | `/assets/{asset_id}` | Full record for a single asset |
+| `GET` | `/assets/{asset_id}/readiness` | Readiness details for a single asset |
+| `GET` | `/assets/{asset_id}/health` | Health model output (anomaly_score, health_score, health_status) |
+| `GET` | `/assets/{asset_id}/failure` | Failure model output (failure_probability, failure_risk) |
+| `GET` | `/assets/{asset_id}/rul` | RUL model output (predicted_rul, rul_status) |
+
+### 📊 Timeseries & Charts
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/assets/{id}/timeseries` | Timeseries history for charts (cycle, health_score, failure_probability, predicted_rul) |
+
+### 🛠️ Maintenance & Priorities
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/maintenance/priorities` | Assets ranked by maintenance urgency (sorted by priority_score desc) |
+
+### 🚀 Mission Readiness
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/missions/{mission_id}/readiness` | Mission readiness evaluation (assigned asset suitability + recommended alternative) |
+
+### 📈 Fleet Dashboard
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/readiness` | Full fleet readiness for dashboard (100 assets with ENG-XXX IDs + mission context) |
+
+### 🧪 Assessment
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/api/assess` | Assess unseen engine sensor CSV — validates schema, runs all 3 models, returns latest-cycle assessment per engine |
+
+---
+
 ## ⚡ How to Run
 
 ### 1 — Install Python dependencies
