@@ -8,7 +8,7 @@
 
 | Field | Value |
 |---|---|
-| **Team Name** | Bob Copilot |
+| **Team Name** | KMStra |
 | **Track** | Defense & Aerospace |
 | **Team Lead** | Disu Makadiya — disu.makadiya@gmail.com |
 | **Members** | Vaibhavi Kariya, Pushti Kansara, Rutvi Shah |
@@ -94,12 +94,13 @@ No application framework, database, API, dashboard, container, or ML dependency 
 
 ## ⚠️ Known Limitations
 
-> Be honest — judges appreciate transparency over overclaiming.
+1. **Simulated Data:** Models are trained on NASA C-MAPSS data, not real military aircraft telemetry.
 
-- No source implementation, model artifacts, training pipeline, tests, dashboard, API, or dependency manifest is present.
-- No real operational aircraft, vehicle, or equipment data is included; C-MAPSS is a public turbofan simulation dataset and operational support data is planned as synthetic.
-- No metrics, SHAP plots, readiness thresholds, deployment results, screenshots, presentation deck, or demo video are available.
-- Readiness labels and maintenance rankings are conceptual and have not been scientifically validated.
+2. **Fixed Sensor Schema:** Current models require the sensor structure used during training; different sensor configurations need adaptation or retraining.
+
+3. **Distribution Shift:** Different operating conditions or sensor scales can affect prediction accuracy and anomaly detection.
+
+4. **Decision Support Only:** Health, failure risk, and RUL are predictions; final maintenance and mission decisions remain with qualified personnel.
 
 ---
 
