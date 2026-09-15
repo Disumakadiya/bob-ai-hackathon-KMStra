@@ -11,20 +11,6 @@
 | npm | 9+ | Comes with Node.js |
 | Git | any | To clone the repository |
 
-## Environment Variables
-
-Copy `src/.env.example` to `src/.env` and fill in values only if you need them.
-The application runs fully without any environment variables for local demo purposes.
-
-| Variable | Description | Required |
-|---|---|---|
-| `APP_PORT` | API server port (default: 8000) | No |
-| `APP_ENV` | `development` or `production` | No |
-| `WATSONX_API_KEY` | IBM watsonx.ai key (not used by current code) | No |
-| `DATABASE_URL` | PostgreSQL URL (no database is used; flat CSV only) | No |
-
-> The application uses **no database**. All persistent data is flat CSV files in `src/data/`.
-
 ## Installation
 
 ### Python dependencies
