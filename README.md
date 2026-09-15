@@ -9,9 +9,9 @@
 
 | Field | Value |
 |---|---|
-| **Team Name** | Bob Copilot |
+| **Team Name** | KMStra |
 | **Track** | AI |
-| **Team Lead** | Disu Makadiya — disu.makadiya@ibm.com |
+| **Team Lead** | Disu Makadiya — disumakadiya@gmail.com |
 | **Members** | Vaibhavi Kariya, Pushti Kansara, Rutvi Shah |
 
 ---
